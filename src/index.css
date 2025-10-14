@@ -1,68 +1,58 @@
-:root {
-  font-family: system-ui, Avenir, Helvetica, Arial, sans-serif;
-  line-height: 1.5;
-  font-weight: 400;
+@import url("https://fonts.googleapis.com/css2?family=Nunito:wght@400;500;600;700;800&family=Rubik:wght@400;500;600;700&display=swap");
+@import "tailwindcss";
 
-  color-scheme: light dark;
-  color: rgba(255, 255, 255, 0.87);
-  background-color: #242424;
+@theme {
+  --font-sans: "Rubik", system-ui, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+  --font-display: "Nunito", "Rubik", system-ui, sans-serif;
 
-  font-synthesis: none;
-  text-rendering: optimizeLegibility;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
-}
+  --color-brand-primary: #0d1f49;
+  --color-brand-secondary: #1f4ed8;
+  --color-brand-accent: #009e41;
+  --color-brand-neutral: #6c7a9a;
 
-a {
-  font-weight: 500;
-  color: #646cff;
-  text-decoration: inherit;
-}
-a:hover {
-  color: #535bf2;
-}
+  --color-surface-default: #ffffff;
+  --color-surface-muted: #f3f6ff;
+  --color-surface-brand: #132c63;
+  --color-surface-inverse: #0d1f49;
+  --color-outline-soft: #d4ddff;
+  --color-feedback-success: #009e41;
+  --color-feedback-danger: #ef4444;
+  --color-header-topbar: #15295f;
+  --color-header-nav: #0d1f49;
 
-body {
-  margin: 0;
-  display: flex;
-  place-items: center;
-  min-width: 320px;
-  min-height: 100vh;
-}
+  --spacing-container: clamp(1.25rem, 4vw, 4rem);
+  --spacing-section: clamp(3.5rem, 8vw, 7rem);
+  --spacing-section-tight: clamp(2.5rem, 6vw, 5rem);
 
-h1 {
-  font-size: 3.2em;
-  line-height: 1.1;
+  --radius-card: 1.5rem;
+  --radius-pill: 9999px;
+
+  --shadow-card: 0 28px 70px -35px rgb(8 20 51 / 0.45);
+
+  --size-content: 90rem;
 }
 
-button {
-  border-radius: 8px;
-  border: 1px solid transparent;
-  padding: 0.6em 1.2em;
-  font-size: 1em;
-  font-weight: 500;
-  font-family: inherit;
-  background-color: #1a1a1a;
-  cursor: pointer;
-  transition: border-color 0.25s;
-}
-button:hover {
-  border-color: #646cff;
-}
-button:focus,
-button:focus-visible {
-  outline: 4px auto -webkit-focus-ring-color;
-}
-
-@media (prefers-color-scheme: light) {
-  :root {
-    color: #213547;
-    background-color: #ffffff;
+@layer base {
+  *, *::before, *::after {
+    box-sizing: border-box;
   }
-  a:hover {
-    color: #747bff;
+
+  html {
+    scroll-behavior: smooth;
   }
-  button {
-    background-color: #f9f9f9;
+
+  body {
+    @apply bg-surface-default text-brand-primary font-sans antialiased;
+    margin: 0;
+    min-height: 100vh;
+  }
+
+  .container-inset {
+    @apply mx-auto w-full px-container;
+    max-width: var(--size-content);
+  }
+
+  .section-spacing {
+    @apply py-section;
   }
 }

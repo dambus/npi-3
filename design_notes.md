@@ -31,7 +31,38 @@
 - Store optimized assets under `public/media` or `src/assets`; document naming convention (`project_slug-hero.webp`).
 - Provide descriptive alt text referencing engineering context (e.g., “Process piping 3D model for refinery revamp”).
 
+## Component System
+- Base Tailwind theme tokens: `--color-brand-primary #0E1E2A`, `--color-brand-secondary #104CBA`, `--color-brand-accent #009E41`, `--color-brand-neutral #898889`; expose as `bg-brand-*`, `text-brand-*`, `border-brand-*` via Tailwind 4 theme API.
+- `Section` layout wrapper with props for background tone (`default`, `muted`, `brand`, `inverse`), optional eyebrow, headline slot, content grid (12/6/4 columns responsive).
+- `HeroPrimary` for marketing heroes: supports media on right/left, primary/secondary CTA buttons, optional badge, gradient overlay control.
+- `StatsStrip` for KPI counters with icon, value, label; multi-column responsive 4/2/1 layout.
+- `LogoWall` grid with optional `variant="carousel"`; accepts array of logos with monochrome toggle.
+- `ServiceCard` reusable card with icon slot, title, body, CTA; variant knobs: `outline`, `filled`, `ghost`.
+- `FeatureTiles` (3-up feature blocks) with icon, heading, description; supports light/dark backgrounds.
+- `TestimonialCard` with avatar, quote, attribution; layout toggle `vertical`/`horizontal` and rating optional.
+- `TeamMemberCard` with photo, role, social links; consistent aspect (3:4) and hover overlay variant.
+- `PricingTable` with tier cards, supports featured tier badge, bullet list, CTA alignment.
+- `ContactForm` module with FormFields grid, info sidebar slot, success/error state messaging.
+- `CTAInline` banner (newsletter/signup) with background options, input/CTA arrangement.
+- `ProjectGallery` for portfolio grid w/ filter and masonry support; integrate quick view modal option.
+- `ProjectDetailLayout` for single case study: hero, metadata summary, rich body blocks, related projects.
+- `BlogCard` (news tile) with meta, excerpt, categories; variant for horizontal list vs grid.
+- `FooterPrimary` multi-column layout with brand block, nav columns, contact info; expandable accordions on mobile.
+- `TopBar` utility strip for contact info and hours; sticky optional.
+- `Breadcrumb` inline component with separators; themeable focus states.
+- `ContactInfoCard` (single instance currently) but good candidate for reuse across pages.
+- `FAQAccordion` for future expansions; base collapsible component styled with brand tokens.
+- `MetricsBadge` small stat pill used in hero ribbons (e.g., "520+ Projects Done").
+- `StepsTimeline` for process sections; vertical on desktop, accordion on mobile.
+- `ResourceCard` for downloads/whitepapers; includes icon, title, description, metadata chip.
+- `FormField` primitives (Input, Select, Textarea, Checkbox) with integrated label, help text, validation states; central Tailwind classes.
+- `Button` variations (`primary`, `secondary`, `tertiary`, `link`, `icon`), size scale, icon slots, loading state.
+- `Badge` / `Pill` tokens for status labels (e.g., "IT Support").
+- `Modal` shell for contact prompts or gallery quick views.
+- `Carousel` wrapper to power sliding sections (testimonials, logos) with arrow/dot controls.
+- `Tabs` component for content switching (future knowledge base).
 ## Color & Theming
+- Legacy brand colors sampled from `npiLogo_original.png`: `#898889` (graphite gray) for structural elements and `#009E41` (petroleum green) for accent blocks; incorporate into palette decisions and Tailwind tokens.
 - Primary: deep navy/charcoal for backgrounds. Secondary accent: desaturated amber or petroleum green for CTAs.
 - Neutral scale for cards/backgrounds: `charcoal-900`, `slate-700`, `gray-100`.
 - Define CSS variables (via Tailwind config) for brand palette and spacing tokens for consistent usage.

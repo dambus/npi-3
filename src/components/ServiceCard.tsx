@@ -82,7 +82,7 @@ export function ServiceCard({
               variant={isFilled ? 'secondary' : 'link'}
               size="sm"
               className={cn(
-                'uppercase tracking-[0.2em]',
+                'uppercase tracking-[0.14em]',
                 isFilled
                   ? 'rounded-[--radius-pill] px-5 py-2 text-xs font-semibold text-brand-primary shadow-none hover:bg-white/90'
                   : 'no-underline text-brand-accent hover:text-brand-accent/80',

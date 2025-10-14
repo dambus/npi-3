@@ -74,7 +74,7 @@ export function FormField(props: FormFieldProps) {
     <div className="flex flex-col gap-2" data-field>
       <label
         htmlFor={id}
-        className="text-sm font-semibold uppercase tracking-[0.2em] text-brand-primary"
+        className="text-sm font-semibold uppercase tracking-[0.14em] text-brand-primary"
       >
         {label}
         {required ? (

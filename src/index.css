@@ -47,6 +47,16 @@
     min-height: 100vh;
   }
 
+  .page-shell {
+    min-height: 100vh;
+    background:
+      linear-gradient(
+        var(--color-header-nav),
+        var(--color-header-nav)
+      ) 0 0 / 100% 220px no-repeat,
+      var(--color-surface-muted);
+  }
+
   .container-inset {
     @apply mx-auto w-full px-container;
     max-width: var(--size-content);

@@ -42,7 +42,7 @@ export function HeroPrimary({
         )}
       >
         {eyebrow ? (
-          <span className="text-sm font-semibold uppercase tracking-[0.3em] text-white/70">
+          <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/70">
             {eyebrow}
           </span>
         ) : null}
@@ -59,7 +59,7 @@ export function HeroPrimary({
           <dl className="grid w-full grid-cols-2 gap-6 sm:grid-cols-3">
             {stats.map((stat) => (
               <div key={stat.label} className="space-y-1">
-                <dt className="text-sm uppercase tracking-[0.2em] text-white/60">
+                <dt className="text-sm uppercase tracking-[0.12em] text-white/60">
                   {stat.label}
                 </dt>
                 <dd className="font-display text-3xl font-semibold text-white">

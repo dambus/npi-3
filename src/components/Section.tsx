@@ -76,7 +76,7 @@ export function Section({
             )}
           >
             {eyebrow ? (
-              <p className={cn('text-sm font-semibold tracking-[0.3em] uppercase', eyebrowClasses)}>
+              <p className={cn('text-sm font-semibold tracking-[0.18em] uppercase', eyebrowClasses)}>
                 {eyebrow}
               </p>
             ) : null}

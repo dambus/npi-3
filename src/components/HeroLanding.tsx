@@ -28,7 +28,7 @@ export function HeroLanding() {
       <div className="container-inset">
         <div className="grid gap-10 pb-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.08fr)] lg:items-center lg:gap-16 xl:gap-20">
           <div className="flex flex-col gap-6">
-            <span className="text-sm font-semibold uppercase tracking-[0.3em] text-white/60">
+            <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
               Engineering excellence since 2008
             </span>
             <h1 className="font-display text-[3.35rem] font-extrabold leading-[1.02] text-white md:text-[3.75rem] xl:text-[4.2rem]">
@@ -42,7 +42,7 @@ export function HeroLanding() {
                 as="a"
                 href="/services"
                 size="lg"
-                className="bg-brand-accent px-8 py-4 text-base uppercase tracking-[0.3em] shadow-[0_24px_55px_rgba(0,158,65,0.35)] hover:bg-brand-accent/90"
+                className="bg-brand-accent px-8 py-4 text-base uppercase tracking-[0.18em] shadow-[0_24px_55px_rgba(0,158,65,0.35)] hover:bg-brand-accent/90"
               >
                 Explore services
               </Button>

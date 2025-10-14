@@ -69,7 +69,7 @@ const serviceFocusOptions = [
 
 function App() {
   return (
-    <div className="flex min-h-screen flex-col bg-surface-muted text-brand-primary">
+    <div className="page-shell flex min-h-screen flex-col text-brand-primary">
       <SiteHeader />
 
       <main className="flex flex-col">

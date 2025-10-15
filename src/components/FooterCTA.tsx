@@ -20,7 +20,7 @@ export function FooterCTA() {
         >
           Download profile (PDF)
         </Button>
-        <Button as="a" href="#contact" variant="ghost" size="lg" className="text-white">
+        <Button as="router-link" to="/contact" variant="ghost" size="lg" className="text-white">
           Plan a consultation
         </Button>
       </div>

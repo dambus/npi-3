@@ -3,6 +3,7 @@ import type {
   ButtonHTMLAttributes,
   ReactNode,
 } from 'react'
+import { Link, type LinkProps } from 'react-router-dom'
 import { cn } from '../lib/cn'
 
 type ButtonVariant = 'primary' | 'secondary' | 'tertiary' | 'ghost' | 'link'
@@ -29,7 +30,16 @@ type ButtonAsAnchor = SharedProps &
     href: string
   }
 
-export type ButtonProps = ButtonAsButton | ButtonAsAnchor
+type ButtonAsRouterLink = SharedProps &
+  LinkProps & {
+    as: 'router-link'
+  }
+
+export type ButtonProps = ButtonAsButton | ButtonAsAnchor | ButtonAsRouterLink
+
+type RouterLinkRestProps = Omit<ButtonAsRouterLink, keyof SharedProps | 'as'>
+type AnchorRestProps = Omit<ButtonAsAnchor, keyof SharedProps | 'as'>
+type NativeButtonRestProps = Omit<ButtonAsButton, keyof SharedProps | 'as'>
 
 const sizeClasses: Record<ButtonSize, string> = {
   sm: 'px-4 py-2 text-sm',
@@ -58,17 +68,18 @@ export function Button(props: ButtonProps) {
     loading,
     className,
     children,
-    as,
-    ...rest
-  } = props as ButtonProps & Record<string, unknown>
+    as = 'button',
+    ...restProps
+  } = props
 
-  const isAnchor = (as ?? 'button') === 'a'
   const isLinkVariant = variant === 'link'
+  const resolvedSize: ButtonSize = size
+  const resolvedVariant: ButtonVariant = variant
   const baseClasses = cn(
     'inline-flex items-center justify-center gap-2 font-semibold tracking-tight transition duration-200 ease-out focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 disabled:cursor-not-allowed disabled:opacity-70',
     isLinkVariant ? '' : 'rounded-[--radius-pill]',
-    isLinkVariant ? 'text-sm' : sizeClasses[size],
-    variantClasses[variant],
+    isLinkVariant ? 'text-sm' : sizeClasses[resolvedSize],
+    variantClasses[resolvedVariant],
     className,
   )
 
@@ -92,8 +103,21 @@ export function Button(props: ButtonProps) {
     </>
   )
 
-  if (isAnchor) {
-    const anchorProps = rest as AnchorHTMLAttributes<HTMLAnchorElement>
+  if (as === 'router-link') {
+    const linkProps = restProps as RouterLinkRestProps
+    return (
+      <Link
+        className={baseClasses}
+        aria-busy={loading || undefined}
+        {...linkProps}
+      >
+        {content}
+      </Link>
+    )
+  }
+
+  if (as === 'a') {
+    const anchorProps = restProps as AnchorRestProps
     return (
       <a
         className={baseClasses}
@@ -105,16 +129,15 @@ export function Button(props: ButtonProps) {
     )
   }
 
-  const buttonProps = rest as ButtonHTMLAttributes<HTMLButtonElement>
-  if (!buttonProps.type) {
-    buttonProps.type = 'button'
-  }
+  const buttonProps = restProps as NativeButtonRestProps
+  const { type = 'button', ...nativeButtonProps } = buttonProps
 
   return (
     <button
+      type={type}
       className={baseClasses}
       aria-busy={loading || undefined}
-      {...buttonProps}
+      {...nativeButtonProps}
     >
       {content}
     </button>

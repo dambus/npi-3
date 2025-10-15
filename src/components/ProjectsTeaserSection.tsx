@@ -29,13 +29,37 @@ export function ProjectsTeaserSection() {
   return (
     <Section
       id="projects"
-      variant="default"
+      variant="muted"
       align="left"
       eyebrow="Selected references"
       title="Projects that demonstrate our sector expertise."
       description="From feasibility studies to commissioning support, our multidisciplinary team delivers traceable documentation and coordination."
-      contentClassName="gap-12"
+      className="relative overflow-hidden"
+      contentClassName="gap-16"
     >
+      <span className="pointer-events-none absolute inset-x-0 bottom-0 -z-10 h-64 bg-[radial-gradient(circle_at_bottom,_rgba(0,158,65,0.25),_transparent_70%)]" />
+      <span className="pointer-events-none absolute inset-y-0 right-0 -z-10 w-1/3 bg-[radial-gradient(circle_at_center,_rgba(13,31,73,0.12),_transparent_70%)]" />
+
+      <div className="grid gap-4 sm:grid-cols-3">
+        {[
+          { value: '23', label: 'Gas & energy facilities' },
+          { value: '32', label: 'Process units modernised' },
+          { value: '18', label: 'International collaborations' },
+        ].map((item) => (
+          <div
+            key={item.label}
+            className="rounded-2xl border border-brand-primary/10 bg-white p-5 text-brand-primary shadow-[0_24px_60px_rgba(8,18,40,0.08)]"
+          >
+            <p className="font-display text-3xl font-semibold text-brand-secondary">
+              {item.value}
+            </p>
+            <p className="mt-2 text-xs font-semibold uppercase tracking-[0.18em] text-brand-neutral">
+              {item.label}
+            </p>
+          </div>
+        ))}
+      </div>
+
       <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
         {projects.map((project) => (
           <ProjectCard key={project.title} {...project} />

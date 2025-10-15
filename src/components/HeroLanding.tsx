@@ -39,16 +39,16 @@ export function HeroLanding() {
             </p>
             <div className="flex flex-wrap items-center gap-4 pt-3">
               <Button
-                as="a"
-                href="/services"
+                as="router-link"
+                to="/services"
                 size="lg"
                 className="bg-brand-accent px-8 py-4 text-base uppercase tracking-[0.18em] shadow-[0_24px_55px_rgba(0,158,65,0.35)] hover:bg-brand-accent/90"
               >
                 Explore services
               </Button>
               <Button
-                as="a"
-                href="/projects"
+                as="router-link"
+                to="/projects"
                 variant="ghost"
                 size="lg"
                 className="border border-brand-accent/40 bg-transparent px-8 py-4 text-base text-white ring-0 hover:border-brand-accent/70 hover:bg-brand-accent/10"

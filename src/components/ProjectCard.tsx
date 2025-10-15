@@ -34,7 +34,7 @@ export function ProjectCard({
         </h3>
         <p className="text-sm text-brand-neutral">{description}</p>
         <div className="mt-auto pt-2">
-          <Button as="a" href={href} variant="link" className="text-sm">
+          <Button as="router-link" to={href} variant="link" className="text-sm">
             View project details
           </Button>
         </div>

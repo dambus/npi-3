@@ -70,7 +70,7 @@ export function Section({
         {(eyebrow || title || description) && (
           <div
             className={cn(
-              'flex flex-col gap-4 max-w-3xl',
+              'flex flex-col max-w-3xl gap-5 md:gap-6',
               alignmentClasses,
               headerClassName,
             )}
@@ -81,12 +81,12 @@ export function Section({
               </p>
             ) : null}
             {title ? (
-              <h2 className="font-display text-3xl font-semibold leading-tight text-balance md:text-5xl">
+              <h2 className="font-display text-4xl font-semibold leading-tight text-balance md:text-[3.25rem] lg:text-[3.75rem]">
                 {title}
               </h2>
             ) : null}
             {description ? (
-              <p className={cn('text-lg leading-relaxed text-pretty', descriptionClasses)}>
+              <p className={cn('text-lg leading-relaxed md:text-xl md:leading-relaxed text-pretty', descriptionClasses)}>
                 {description}
               </p>
             ) : null}

@@ -77,8 +77,8 @@ export function ServiceCard({
         <div className="mt-auto flex items-end justify-between gap-4">
           {href ? (
             <Button
-              as="a"
-              href={href}
+              as="router-link"
+              to={href}
               variant={isFilled ? 'secondary' : 'link'}
               size="sm"
               className={cn(

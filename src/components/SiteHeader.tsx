@@ -6,6 +6,7 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from '@heroicons/react/24/outline'
+import { Link, NavLink } from 'react-router-dom'
 import Button from './Button'
 
 type ClassValue = string | false | null | undefined
@@ -15,12 +16,13 @@ function cx(...values: ClassValue[]) {
 }
 
 const navLinks = [
-  { label: 'Home', href: '#' },
-  { label: 'About us', href: '#about' },
-  { label: 'Services', href: '#services' },
-  { label: 'Projects', href: '#portfolio' },
-  { label: 'Blog', href: '#news' },
-  { label: 'Contact', href: '#contact' },
+  { label: 'Home', to: '/' },
+  { label: 'About us', to: '/about' },
+  { label: 'Services', to: '/services' },
+  { label: 'Industries', to: '/industries' },
+  { label: 'Projects', to: '/projects' },
+  { label: 'Blog', to: '/blog' },
+  { label: 'Contact', to: '/contact' },
 ]
 
 const topBarItems = [
@@ -52,10 +54,6 @@ const topBarItems = [
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
-  const [activeHref, setActiveHref] = useState<string>(() => {
-    if (typeof window === 'undefined') return '#'
-    return window.location.hash || '#'
-  })
 
   const lastYRef = useRef(0)
   const hiddenRef = useRef(false)
@@ -72,22 +70,6 @@ export function SiteHeader() {
   useEffect(() => {
     scrolledRef.current = scrolled
   }, [scrolled])
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-
-    const getHash = () => window.location.hash || '#'
-
-    const onHashChange = () => {
-      setActiveHref(getHash())
-    }
-
-    onHashChange()
-    window.addEventListener('hashchange', onHashChange)
-    return () => {
-      window.removeEventListener('hashchange', onHashChange)
-    }
-  }, [])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
@@ -194,16 +176,16 @@ export function SiteHeader() {
             scrolled && 'gap-4',
           )}
         >
-          <a href="#" className="flex items-center justify-start">
-            <img
-              src="/media/npi-logo.png"
-              alt="NPI logo"
-              className={cx(
-                'w-auto drop-shadow-[0_18px_35px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out',
-                scrolled ? 'h-14' : 'h-16',
-              )}
-            />
-          </a>
+        <Link to="/" className="flex items-center justify-start" aria-label="NPI home">
+          <img
+            src="/media/npi-logo.png"
+            alt="NPI logo"
+            className={cx(
+              'w-auto drop-shadow-[0_18px_35px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out',
+              scrolled ? 'h-14' : 'h-16',
+            )}
+          />
+        </Link>
 
           <motion.div
             layout
@@ -264,42 +246,41 @@ export function SiteHeader() {
             >
               <nav aria-label="Primary" className="flex flex-1 justify-end">
                 <ul className="flex flex-wrap items-center gap-7 text-base font-semibold text-white/80">
-                  {navLinks.map((link) => {
-                    const isActive =
-                      activeHref === link.href ||
-                      (!activeHref && link.href === '#') ||
-                      (activeHref === '#' && link.href === '#')
-
-                    return (
-                      <li key={link.label} className="relative flex items-center">
-                        <a
-                          href={link.href}
-                          className={cx(
-                            'px-1.5 py-2 transition-colors duration-200 ease-out',
+                  {navLinks.map((link) => (
+                    <li key={link.label} className="relative flex items-center">
+                      <NavLink
+                        to={link.to}
+                        end={link.to === '/'}
+                        className={({ isActive }: { isActive: boolean }) =>
+                          cx(
+                            'relative inline-flex items-center px-1.5 py-2 transition-colors duration-200 ease-out',
                             isActive ? 'text-white' : 'text-white/70 hover:text-white',
-                          )}
-                          onClick={() => setActiveHref(link.href)}
-                        >
-                          {link.label}
-                        </a>
-                        <span
-                          className={cx(
-                            'pointer-events-none absolute left-1/2 top-full mt-1 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[color:var(--color-brand-accent,#009E41)] transition-all duration-200 ease-out',
-                            isActive
-                              ? 'scale-100 opacity-100'
-                              : 'scale-50 opacity-0',
-                          )}
-                          aria-hidden="true"
-                        />
-                      </li>
-                    )
-                  })}
+                          )
+                        }
+                      >
+                        {({ isActive }: { isActive: boolean }) => (
+                          <>
+                            <span>{link.label}</span>
+                            <span
+                              className={cx(
+                                'pointer-events-none absolute left-1/2 top-full mt-1 h-1.5 w-1.5 -translate-x-1/2 rounded-full bg-[color:var(--color-brand-accent,#009E41)] transition-all duration-200 ease-out',
+                                isActive
+                                  ? 'scale-100 opacity-100'
+                                  : 'scale-50 opacity-0',
+                              )}
+                              aria-hidden="true"
+                            />
+                          </>
+                        )}
+                      </NavLink>
+                    </li>
+                  ))}
                 </ul>
               </nav>
 
               <Button
-                as="a"
-                href="#contact"
+                as="router-link"
+                to="/contact"
                 variant="primary"
                 size="md"
                 className="whitespace-nowrap rounded-full px-6 py-3 text-xs font-semibold uppercase tracking-[0.18em]"

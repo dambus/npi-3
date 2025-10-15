@@ -1,5 +1,6 @@
 import { Route, Routes } from 'react-router-dom'
 import SiteHeader from './components/SiteHeader'
+import ScrollToTop from './components/ScrollToTop'
 import AboutPage from './pages/AboutPage'
 import BlogPage from './pages/BlogPage'
 import CareersPage from './pages/CareersPage'
@@ -18,6 +19,7 @@ function App() {
     <div className="page-shell flex min-h-screen flex-col text-brand-primary">
       <SiteHeader />
       <main className="flex flex-1 flex-col">
+        <ScrollToTop />
         <Routes>
           <Route path="/" element={<HomePage />} />
           <Route path="/about" element={<AboutPage />} />

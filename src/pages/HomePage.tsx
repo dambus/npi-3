@@ -15,42 +15,42 @@ const services = [
     description:
       'Integrated scheduling, procurement support, interface management and reporting to keep engineering deliverables aligned with CAPEX and compliance targets.',
     ctaLabel: 'See methodology',
-    href: '/services#project-management',
+    href: '/services',
     variant: 'filled' as const,
   },
   {
     title: 'Studies & analysis',
     description:
       'Feasibility, due diligence, risk and integrity assessments that inform investment decisions and modernisation roadmaps.',
-    href: '/services#studies',
+    href: '/services',
     ctaLabel: 'Review scope',
   },
   {
     title: 'Conceptual design',
     description:
       'Concept selection, process simulations and layout strategies that establish technical direction, budgetary accuracy and permitting readiness.',
-    href: '/services#conceptual',
+    href: '/services',
     ctaLabel: 'View deliverables',
   },
   {
     title: 'Detail design',
     description:
       'Discipline documentation, workshop drawings, equipment specifications and vendor coordination for construction and installation.',
-    href: '/services#detail',
+    href: '/services',
     ctaLabel: 'Explore documentation',
   },
   {
     title: 'Supervision & commissioning',
     description:
       'Licensed supervision, site instructions and commissioning protocols to ensure quality, safety and compliance during execution.',
-    href: '/services#supervision',
+    href: '/services',
     ctaLabel: 'Plan supervision',
   },
   {
     title: 'Consulting & compliance',
     description:
       'Regulatory advisory, licensing, ISO integration and training programmes that secure approvals and operational readiness.',
-    href: '/services#consulting',
+    href: '/services',
     ctaLabel: 'Talk to an expert',
   },
 ]

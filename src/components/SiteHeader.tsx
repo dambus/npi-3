@@ -6,7 +6,7 @@ import {
   MapPinIcon,
   PhoneIcon,
 } from '@heroicons/react/24/outline'
-import { Link, NavLink } from 'react-router-dom'
+import { Link, NavLink, useLocation } from 'react-router-dom'
 import Button from './Button'
 
 type ClassValue = string | false | null | undefined
@@ -54,6 +54,7 @@ const topBarItems = [
 export function SiteHeader() {
   const [scrolled, setScrolled] = useState(false)
   const [hidden, setHidden] = useState(false)
+  const location = useLocation()
 
   const lastYRef = useRef(0)
   const hiddenRef = useRef(false)
@@ -149,6 +150,23 @@ export function SiteHeader() {
     }
   }, [])
 
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+
+    const currentY = window.scrollY ?? window.pageYOffset ?? 0
+    lastYRef.current = currentY
+
+    const nextScrolled = currentY > COMPACT_ENTER
+    scrolledRef.current = nextScrolled
+    setScrolled(nextScrolled)
+
+    if (currentY <= 0) {
+      hiddenRef.current = false
+      setHidden(false)
+      upAccumRef.current = 0
+    }
+  }, [location.pathname])
+
   return (
     <motion.header
       layout
@@ -161,6 +179,7 @@ export function SiteHeader() {
           ? '-translate-y-full opacity-0 pointer-events-none'
           : 'translate-y-0 opacity-100 pointer-events-auto',
       )}
+      data-site-header
     >
       <motion.div
         layout
@@ -176,16 +195,16 @@ export function SiteHeader() {
             scrolled && 'gap-4',
           )}
         >
-        <Link to="/" className="flex items-center justify-start" aria-label="NPI home">
-          <img
-            src="/media/npi-logo.png"
-            alt="NPI logo"
-            className={cx(
-              'w-auto drop-shadow-[0_18px_35px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out',
-              scrolled ? 'h-14' : 'h-16',
-            )}
-          />
-        </Link>
+            <Link to="/" className="flex items-center justify-start" aria-label="NPI home">
+              <img
+                src="/media/npi-logo.png"
+                alt="NPI logo"
+                className={cx(
+                  'w-auto drop-shadow-[0_18px_35px_rgba(0,0,0,0.35)] transition-all duration-300 ease-out',
+                  scrolled ? 'h-14' : 'h-16',
+                )}
+              />
+            </Link>
 
           <motion.div
             layout

@@ -1,20 +1,20 @@
 import {
-  AdjustmentsHorizontalIcon,
-  BoltIcon,
-  BriefcaseIcon,
-  CloudIcon,
+  BeakerIcon,
+  ClipboardDocumentCheckIcon,
+  Cog6ToothIcon,
   CpuChipIcon,
   ShieldCheckIcon,
+  WrenchScrewdriverIcon,
 } from '@heroicons/react/24/outline'
 import Button from './Button'
 
 const heroServices = [
-  { name: 'IT Management', icon: BriefcaseIcon },
-  { name: 'Cloud Services', icon: CloudIcon },
-  { name: 'Data Services', icon: CpuChipIcon },
-  { name: 'Cyber Security', icon: ShieldCheckIcon },
-  { name: 'Web Services', icon: AdjustmentsHorizontalIcon },
-  { name: 'Machine Learning', icon: BoltIcon },
+  { name: 'Process & instrumentation design', icon: BeakerIcon },
+  { name: 'Mechanical & piping packages', icon: Cog6ToothIcon },
+  { name: 'Electrical & automation systems', icon: CpuChipIcon },
+  { name: 'Project management & supervision', icon: ClipboardDocumentCheckIcon },
+  { name: 'Regulatory compliance & permitting', icon: ShieldCheckIcon },
+  { name: 'Commissioning & lifecycle support', icon: WrenchScrewdriverIcon },
 ]
 
 export function HeroLanding() {

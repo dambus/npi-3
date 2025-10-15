@@ -12,21 +12,21 @@ const featuredServices = [
     description:
       'Process simulations, equipment sizing, P&IDs, layout drawings and detailed documentation ready for permitting and construction.',
     icon: <CubeTransparentIcon className="h-6 w-6" aria-hidden="true" />,
-    href: '/services#design',
+    href: '/services',
   },
   {
     title: 'Project management & supervision',
     description:
       'Planning, scheduling, site coordination and licensed supervision to keep budgets, safety and compliance on track until handover.',
     icon: <PresentationChartLineIcon className="h-6 w-6" aria-hidden="true" />,
-    href: '/services#project-management',
+    href: '/services',
   },
   {
     title: 'Studies & analysis',
     description:
       'Feasibility, risk and integrity assessments aligned with Serbian and EU requirements, including remediation recommendations.',
     icon: <ClipboardDocumentCheckIcon className="h-6 w-6" aria-hidden="true" />,
-    href: '/services#studies',
+    href: '/services',
   },
 ]
 

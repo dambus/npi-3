@@ -15,11 +15,12 @@
 ## Navigation & Header
 - Sticky header with transparent background over hero, switching to solid background on scroll.
 - Include language toggle placeholder (SR/EN) even if secondary language deferred.
-- Mobile menu: slide-in panel with focus trap; ensure accessible toggle button.
+- Mobile menu: hamburger-triggered fullscreen drawer with focus trap, quick contact shortcuts and CTA mirrored from desktop; closes on route change and `Esc`.
 
 ## Key Components
 - `HeroPrimary`: eyebrow, H1, supporting copy, primary CTA, optional secondary CTA.
-- `ValueIcons`: icon + numeric/stat text; keep consistent icon shape (64px square) and align to grid.
+- `ValueIconsSection`: floating KPI ribbon that overlaps preceding hero (gradient split navy/white), counters in display font, centered eyebrow/title copy followed by tabbed content (icons, animated underline). Each tab pairs narrative copy with irregular masked imagery and orbiting accent layers; ensure tabs stay keyboard accessible.
+- `AboutTeaser`: muted background section with two-column layout; left side uses numbered highlight tiles + KPI cards, right side features glassy “Integrated disciplines” card with discipline pills and supporting details. CTA mirrors hero primary button treatment.
 - `ServiceCard` and `ProjectCard`: use shared elevation styles (border + subtle shadow), highlight CTA arrow on hover.
 - `LogoWall`: grayscale logos with 50% opacity baseline; increase opacity on hover/focus.
 - `FilterBar`: pill buttons with active state accent color; support keyboard navigation.
@@ -70,7 +71,8 @@
 ## Motion & Interaction
 - Use subtle fade + translateY (12–24px) on scroll-triggered sections; respect `prefers-reduced-motion`.
 - Buttons: 200ms ease-out transitions, focus ring color aligned to accent palette.
-- Logo wall and cards: scale 1.02 on hover with shadow accent.
+  - Logo wall and cards: scale 1.02 on hover with shadow accent.
+  - ValueIconsSection tabs fade between panels (~420ms) and keep two masked orbit layers visible; ensure motion pauses under `prefers-reduced-motion`.
 
 ## Accessibility
 - Maintain minimum 4.5:1 contrast for text/background combinations.

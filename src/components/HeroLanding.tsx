@@ -19,7 +19,7 @@ const heroServices = [
 
 export function HeroLanding() {
   return (
-    <section className="relative overflow-hidden bg-[color:var(--color-surface-inverse)] pb-36 pt-[5.5rem] text-white md:pb-44">
+    <section className="relative overflow-hidden bg-[color:var(--color-surface-inverse)] pb-[16.5rem] pt-[5.5rem] text-white md:pb-[18.5rem]">
       <div className="absolute inset-0 -z-10 bg-gradient-to-br from-[#152b63] via-[#0f1f4a] to-[#07143a]" />
       <div className="absolute -left-20 top-6 -z-10 h-52 w-52 rounded-full bg-brand-secondary/25 blur-2xl" />
       <div className="absolute bottom-14 left-1/3 -z-10 h-64 w-64 -translate-x-1/2 rounded-full bg-brand-secondary/15 blur-3xl" />

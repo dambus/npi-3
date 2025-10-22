@@ -1,37 +1,30 @@
 import Button from './Button'
 import Section from './Section'
 
-const highlights = [
-  {
-    title: 'Full project lifecycle coverage',
-    description:
-      'Conceptual, basic and detail design with supervision and commissioning support keeps every phase aligned under one governance model.',
-  },
-  {
-    title: 'Documented delivery frameworks',
-    description:
-      'Feasibility studies, permitting packages and regulatory submissions produced with ISO 9001-backed control and traceability.',
-  },
-  {
-    title: 'Regional reach from Novi Sad',
-    description:
-      'Projects delivered across Serbia and neighbouring EU markets supported by multilingual teams and supplier partnerships.',
-  },
-]
+import aboutImage from '../../input data/design/promo pictures/DSC_8772.jpg'
 
-const stats = [
-  { value: '17', label: 'Years in operation' },
-  { value: '80+', label: 'Major projects delivered' },
-  { value: '6', label: 'Discipline leads' },
-]
+const heading = 'Engineering partner focused on dependable project delivery.'
 
-const disciplinePillars = [
-  'Process engineering',
-  'Mechanical & piping',
-  'Electrical & automation',
-  'Instrumentation & control',
-  'Civil & structural',
-  'Fire & safety',
+const subheading =
+  'Neopetrol Inzenjering d.o.o. is a Novi Sad-based engineering and consulting company specialised in the oil, gas and petrochemical sectors. Since 2008 we have delivered reliable documentation and expert support across all phases - from studies and concept designs to detail documentation and site supervision.'
+
+const historySummary =
+  'We opened our doors in 2008 as a small drafting office beside the Petrohemija refinery. The founding team kept the same desks, slowed the pace only long enough to mentor graduates, and grew the practice through steady partnerships rather than headline projects.'
+
+const quickFacts = [
+  {
+    value: '2008',
+    label: 'Registration of Neopetrol Inzenjering in Novi Sad',
+  },
+  {
+    value: '17',
+    suffix: '',
+    label: 'Continuous practice with the original leadership group',
+  },
+  {
+    value: '1200+',
+    label: 'Drawings and documents archived from our earliest programmes',
+  },
 ]
 
 export function AboutTeaser() {
@@ -39,116 +32,92 @@ export function AboutTeaser() {
     <Section
       id="about"
       variant="muted"
-      className="relative overflow-hidden"
       align="left"
-      title="Engineering partner focused on dependable project delivery."
-      description="Neopetrol Inzenjering d.o.o. is a Novi Sad-based engineering and consulting company specialised in the oil, gas and petrochemical sectors. Since 2008 we have delivered reliable documentation and expert support across all phases - from studies and concept designs to detail documentation and site supervision."
-      contentClassName="gap-16"
+      fullWidth
+      className="relative overflow-hidden lg:py-0"
+      contentClassName="relative isolate gap-0 p-0"
     >
-      <span className="pointer-events-none absolute inset-x-0 -top-32 -z-10 h-[420px] bg-[radial-gradient(circle_at_top,_rgba(18,36,76,0.12),_transparent_70%)]" />
-      <span className="pointer-events-none absolute -bottom-32 right-10 -z-10 h-[320px] w-[320px] rounded-full bg-brand-secondary/15 blur-3xl" />
-
-      <div className="grid gap-16 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,0.95fr)] lg:items-start">
-        <div className="space-y-12">
-          <div className="grid gap-6 md:grid-cols-2">
-            {highlights.map((item, index) => (
-              <article
-                key={item.title}
-                className="relative flex flex-col gap-4 rounded-[1.75rem] border border-brand-primary/10 bg-white/95 p-8 shadow-[0_35px_80px_rgba(8,18,40,0.12)]"
-              >
-                <span className="pointer-events-none absolute -left-3 top-6 inline-flex h-12 w-12 items-center justify-center rounded-2xl bg-brand-accent/15 font-display text-xl font-semibold text-brand-accent">
-                  {String(index + 1).padStart(2, '0')}
-                </span>
-                <h3 className="pl-12 font-display text-xl font-semibold text-brand-primary">
-                  {item.title}
-                </h3>
-                <p className="pl-12 text-base leading-relaxed text-brand-primary/85">
-                  {item.description}
-                </p>
-              </article>
-            ))}
+      <div className="pointer-events-none absolute inset-y-0 left-[48%] hidden w-[420px] -translate-x-1/2 rounded-full bg-brand-accent/10 blur-3xl lg:block" />
+      <div className="grid w-full items-stretch lg:grid-cols-[minmax(0,0.55fr)_minmax(0,0.45fr)]">
+        <div className="relative z-10 flex flex-col justify-center gap-10 px-6 py-16 sm:px-10 md:py-20 lg:pl-[var(--spacing-container)] lg:pr-14 xl:pl-[var(--spacing-container)] xl:pr-16 2xl:pl-[calc((100vw-var(--size-content))/2)] 2xl:pr-20">
+          <div className="flex max-w-[620px] flex-col gap-6 text-brand-primary">
+            <h2 className="font-display text-4xl font-semibold leading-tight text-balance md:text-[3.25rem] lg:text-[3.6rem]">
+              {heading}
+            </h2>
+            <p className="text-lg leading-relaxed text-brand-neutral md:text-xl md:leading-relaxed text-pretty">
+              {subheading}
+            </p>
           </div>
 
-          <div className="grid gap-6 sm:grid-cols-3">
-            {stats.map((item) => (
-              <div
-                key={item.label}
-                className="rounded-2xl border border-brand-secondary/20 bg-white p-6 text-brand-primary shadow-[0_28px_65px_rgba(9,22,48,0.12)]"
-              >
-                <p className="font-display text-4xl font-semibold tracking-tight text-brand-secondary md:text-5xl">
-                  {item.value}
-                </p>
-                <p className="mt-3 text-xs uppercase tracking-[0.24em] text-brand-neutral">
-                  {item.label}
-                </p>
-              </div>
-            ))}
-          </div>
+          <div className="flex flex-col gap-8">
+            <p className="max-w-[520px] text-sm leading-relaxed text-brand-primary/75 md:text-base">
+              {historySummary}
+            </p>
 
-          <Button
-            as="router-link"
-            to="/about"
-            variant="primary"
-            size="lg"
-            className="inline-flex items-center gap-2 rounded-full px-7 py-4 text-xs font-semibold uppercase tracking-[0.18em] shadow-[0_28px_60px_rgba(0,158,65,0.28)]"
-          >
-            Learn more about us
-          </Button>
-        </div>
-
-        <div className="relative overflow-hidden rounded-[2.5rem] border border-brand-primary/15 bg-white/95 p-10 shadow-[0_45px_100px_rgba(7,18,42,0.16)]">
-          <span className="pointer-events-none absolute left-10 top-8 inline-flex items-center gap-3 rounded-full border border-brand-accent/30 bg-brand-accent/10 px-5 py-2 text-sm font-semibold uppercase tracking-[0.24em] text-brand-accent">
-            Integrated disciplines
-          </span>
-
-          <div className="mt-16 grid gap-8">
-            <div className="space-y-4">
-              <h3 className="font-display text-2xl font-semibold text-brand-primary">
-                Multidisciplinary pods, one accountable lead.
-              </h3>
-              <p className="text-sm leading-relaxed text-brand-neutral md:text-base">
-                Dedicated discipline leads coordinate weekly to align design interfaces, RFIs and approval gates. Every package is released with consolidated metadata, revision trails and responsibility matrix.
-              </p>
-            </div>
-
-            <div className="grid gap-3 rounded-2xl border border-brand-primary/15 bg-brand-secondary/5 p-6 text-sm text-brand-primary shadow-[0_20px_50px_rgba(12,30,60,0.12)] sm:grid-cols-2">
-              {disciplinePillars.map((item) => (
-                <span key={item} className="flex items-center gap-3">
-                  <span className="inline-flex h-2.5 w-2.5 rounded-full bg-brand-accent" />
-                  <span>{item}</span>
-                </span>
+            <div className="mt-4 mb-6 grid gap-6 sm:grid-cols-3">
+              {quickFacts.map((item, index) => (
+                <div
+                  key={item.label}
+                  className="group relative flex flex-col items-center gap-4 rounded-xl border border-brand-primary/0 bg-white/10 p-6 py-12 text-center shadow-[0_32px_70px_rgba(8,24,55,0.12)] backdrop-blur"
+                >
+                  <div className="relative flex flex-col items-center gap-3">
+                    <div className="relative inline-flex h-24 w-24 items-center justify-center rounded-full border-[4px] border-white/70 bg-white text-brand-primary shadow-[0_16px_30px_rgba(8,24,55,0.22)]">
+                      <span className="pointer-events-none absolute inset-0 rounded-full border border-brand-secondary/10 transition-transform duration-300 group-hover:scale-105" />
+                      <span className="pointer-events-none absolute inset-1 rounded-full border border-brand-secondary/15 opacity-80" />
+                      <span
+                        className="pointer-events-none absolute -inset-2 z-0 rounded-full bg-brand-secondary/60 blur-sm mix-blend-screen animate-orbit-one scale-80"
+                        style={{ animationDelay: `${index * 3}s` }}
+                      />
+                      <span
+                        className="pointer-events-none absolute -inset-4 z-0 rounded-full bg-brand-accent/50 blur-none mix-blend-screen animate-orbit-two scale-75"
+                        style={{ animationDelay: `${index * 0.9 + 0.45}s` }}
+                      />
+                      <span className="relative z-10 font-display text-3xl font-bold tracking-tight md:text-3xl text-brand-secondary/75">
+                        {item.value}
+                        {item.suffix ? (
+                          <span className="ml-1 align-baseline text-sm font-semibold uppercase tracking-[0.22em] text-brand-secondary/70">
+                            {item.suffix}
+                          </span>
+                        ) : null}
+                      </span>
+                    </div>
+                    <p className="text-sm leading-relaxed text-brand-neutral md:text-base mt-4">
+                      {item.label}
+                    </p>
+                  </div>
+                </div>
               ))}
             </div>
 
-            <div className="rounded-2xl border border-brand-primary/10 bg-white/90 p-6 text-sm text-brand-primary/85 shadow-[0_22px_50px_rgba(9,20,40,0.08)]">
-              <p className="font-semibold text-brand-primary">
-                How teams stay aligned
-              </p>
-              <ul className="mt-4 space-y-3">
-                <li className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-brand-accent/15 text-brand-accent">
-                    •
-                  </span>
-                  <span>Weekly interface reviews synchronise discipline milestones and manage change requests.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-brand-accent/15 text-brand-accent">
-                    •
-                  </span>
-                  <span>Central document control with live dashboards keeps stakeholders updated on issued deliverables.</span>
-                </li>
-                <li className="flex items-start gap-3">
-                  <span className="mt-1 inline-flex h-5 w-5 flex-none items-center justify-center rounded-full bg-brand-accent/15 text-brand-accent">
-                    •
-                  </span>
-                  <span>Rapid response pods mobilise onsite for inspections, punch-lists and commissioning readiness.</span>
-                </li>
-              </ul>
-            </div>
+            <Button
+              as="router-link"
+              to="/about"
+              variant="primary"
+              size="lg"
+              className="inline-flex items-center gap-2 self-start rounded-full px-7 py-4 text-xs font-semibold uppercase tracking-[0.18em] shadow-[0_28px_60px_rgba(0,158,65,0.28)]"
+            >
+              Learn more
+            </Button>
           </div>
+        </div>
 
-          <span className="pointer-events-none absolute -right-20 top-1/2 h-44 w-44 -translate-y-1/2 rounded-full border border-brand-accent/20" />
-          <span className="pointer-events-none absolute -bottom-16 left-1/3 h-32 w-32 rounded-full bg-brand-accent/12 blur-lg" />
+        <div className="relative isolate order-first h-[320px] overflow-hidden sm:h-[460px] lg:order-none lg:h-full">
+          <img
+            src={aboutImage}
+            alt="Neopetrol team working at the Novi Sad studio"
+            className="absolute inset-0 h-full w-full object-cover"
+          />
+          <div className="absolute inset-0 bg-gradient-to-l from-brand-primary/85 via-brand-primary/45 to-transparent" />
+          <div className="absolute inset-0 bg-brand-primary/15 mix-blend-multiply" />
+          <span className="pointer-events-none absolute -right-16 top-8 hidden h-44 w-44 rounded-full border border-white/15 lg:block" />
+          <span className="pointer-events-none absolute bottom-8 right-8 inline-flex h-32 w-32 flex-col items-center justify-center gap-1 rounded-full border border-white/60 bg-white/12 text-center uppercase tracking-[0.28em] text-white/85 shadow-[0_25px_60px_rgba(6,20,46,0.45)] backdrop-blur-sm transition-transform duration-300 sm:h-36 sm:w-36 sm:gap-1.5 md:bottom-10 md:right-10 lg:h-40 lg:w-40">
+            <span className="text-[0.6rem] font-semibold text-white/70 sm:text-[0.65rem]">
+              Since
+            </span>
+            <span className="font-display text-2xl font-bold tracking-[0.12em] text-white sm:text-[1.75rem] md:text-[2rem]">
+              2008
+            </span>
+          </span>
         </div>
       </div>
     </Section>

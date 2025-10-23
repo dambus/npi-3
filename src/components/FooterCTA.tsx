@@ -15,8 +15,9 @@ export function FooterCTA() {
         <Button
           as="a"
           href="/downloads/npi-company-profile.pdf"
+          variant="primary"
           size="lg"
-          className="bg-white text-brand-primary hover:bg-brand-accent hover:text-white"
+          className="px-7"
         >
           Download profile (PDF)
         </Button>

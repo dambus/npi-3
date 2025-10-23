@@ -24,7 +24,7 @@ export function ProjectCard({
           className="h-full w-full object-cover"
           loading="lazy"
         />
-        <span className="absolute left-5 top-5 rounded-full bg-white/80 px-3 py-1 text-xs font-semibold uppercase tracking-[0.18em] text-brand-primary shadow">
+        <span className="absolute left-5 top-5 rounded-[--radius-pill] bg-brand-accent from-brand-secondary/95 via-brand-secondary/85 to-brand-accent/85 px-3 py-1 text-[0.65rem] font-normal uppercase tracking-[0.22em] text-white shadow-[0_18px_35px_rgba(12,30,70,0.3)]">
           {industry}
         </span>
       </div>

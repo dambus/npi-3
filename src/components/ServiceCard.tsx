@@ -23,6 +23,7 @@ export interface ServiceCardProps {
   className?: string
   footer?: ReactNode
   children?: ReactNode
+  iconStyle?: 'default' | 'soft' | 'none'
 }
 
 export function ServiceCard({
@@ -35,8 +36,23 @@ export function ServiceCard({
   className,
   footer,
   children,
+  iconStyle = 'default',
 }: ServiceCardProps) {
   const isFilled = variant === 'filled'
+
+  const iconBaseClasses =
+    iconStyle === 'none'
+      ? 'inline-flex h-10 w-10 items-center justify-center text-xl text-brand-primary'
+      : 'inline-flex h-12 w-12 items-center justify-center rounded-[--radius-pill] text-xl'
+
+  const iconVariantClasses =
+    iconStyle === 'none'
+      ? ''
+      : isFilled
+        ? 'bg-white/15 text-white'
+        : iconStyle === 'soft'
+          ? 'bg-brand-primary/8 text-brand-primary'
+          : 'bg-brand-accent/10 text-brand-accent'
 
   return (
     <article
@@ -50,8 +66,8 @@ export function ServiceCard({
         {icon ? (
           <span
             className={cn(
-              'inline-flex h-12 w-12 items-center justify-center rounded-[--radius-pill] text-xl',
-              isFilled ? 'bg-white/15 text-white' : 'bg-brand-accent/10 text-brand-accent',
+              iconBaseClasses,
+              iconVariantClasses,
             )}
           >
             {icon}

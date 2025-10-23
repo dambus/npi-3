@@ -25,6 +25,9 @@
 - `LogoWall`: grayscale logos with 50% opacity baseline; increase opacity on hover/focus.
 - `FilterBar`: pill buttons with active state accent color; support keyboard navigation.
 - `ContactForm` / `ApplyForm`: two-column on desktop, stacked on mobile; integrate validation states with Tailwind error styles.
+- `FeaturedServicesSection`: single merged services band. Top block: intro copy left, featured trio of image-driven cards right/stacked with per-card accent gradients. Middle CTA: horizontal gradient panel with left-aligned messaging, vertically stacked steps timeline, and luminous secondary button. Bottom grid: detailed services cards share height, no tinted icon background by default (`iconStyle="none"`).
+- `ProjectsTeaserSection`: headline and description introduce the references section, followed by centred About-style orbit counters. Project cards sit below in a responsive grid with brand-gradient industry tags and a ghost “See all projects” button.
+- `FooterCTA`: inverse band with primary CTA for PDF download (matching contact form button styling) and secondary ghost button linking to contact form.
 
 ## Imagery & Media
 - Source hero/background images from `input data/design`; convert to WebP (1600px width) and provide fallback if necessary.

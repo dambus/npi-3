@@ -1,5 +1,10 @@
 # Progress Roadmap
 
+## Update 2025-10-23
+- Initiated "Project detail experience" workstream: planning JSON data storage, dynamic routing, and gallery requirements.
+- Next: model project data (Phase 2), build detail layout (Phase 3), wire gallery/lightbox (Phase 4).
+
+
 ## Phase 0 — Discovery & Technical Foundation
 - [ ] Confirm final tech stack (React + Vite + TailwindCSS + supporting tooling) and document baseline configuration decisions.
 - [ ] Audit `input data/design` assets; catalogue reusable imagery, palettes and typography references.

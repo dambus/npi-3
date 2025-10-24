@@ -10,6 +10,7 @@ import HomePage from './pages/HomePage'
 import LegalCookiesPage from './pages/LegalCookiesPage'
 import LegalPrivacyPage from './pages/LegalPrivacyPage'
 import NotFoundPage from './pages/NotFoundPage'
+import ProjectDetailPage from './pages/ProjectDetailPage'
 import ProjectsPage from './pages/ProjectsPage'
 import QualityPage from './pages/QualityPage'
 import ServicesPage from './pages/ServicesPage'
@@ -25,6 +26,7 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/quality" element={<QualityPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />

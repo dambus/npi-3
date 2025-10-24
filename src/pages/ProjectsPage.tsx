@@ -1,7 +1,9 @@
 import ContactSection from '../components/ContactSection'
 import HeroPrimary from '../components/HeroPrimary'
+import ProjectCard from '../components/ProjectCard'
 import ProjectsTeaserSection from '../components/ProjectsTeaserSection'
 import Section from '../components/Section'
+import { getAllProjects } from '../data/projects'
 
 const upcomingCaseStudies = [
   {
@@ -58,6 +60,8 @@ const requestChecklist = [
 ]
 
 export function ProjectsPage() {
+  const projects = getAllProjects()
+
   return (
     <>
       <HeroPrimary
@@ -66,6 +70,25 @@ export function ProjectsPage() {
         description="Full project catalogue with filters, technical scope and documentation samples is coming soon. Explore selected highlights below and contact us for specific references."
       />
       <ProjectsTeaserSection />
+      <Section
+        align="left"
+        title="Active project references"
+        description="Browse a sample of live case studies. Each entry links to a detailed overview with scope, approach, and gallery."
+        contentClassName="gap-12"
+      >
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {projects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              title={project.name}
+              industry={project.category}
+              description={project.shortDescription}
+              image={project.heroImage.src}
+              href={`/projects/${project.slug}`}
+            />
+          ))}
+        </div>
+      </Section>
       <Section
         align="left"
         title="Need a detailed case study?"

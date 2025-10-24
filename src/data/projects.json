@@ -1,0 +1,128 @@
+[
+  {
+    "slug": "banatski-dvor-storage-expansion",
+    "name": "Expansion of underground gas storage - Banatski Dvor",
+    "shortDescription": "Concept through detail design for compression, dehydration and metering units, including safety systems and integration with existing infrastructure.",
+    "client": "NIS / Gazprom Neft joint venture",
+    "category": "Gas storage",
+    "year": 2024,
+    "description": [
+      "Neopetrol Inzenjering delivered multidisciplinary support for the Banatski Dvor underground gas storage expansion. The team coordinated process, mechanical and electrical disciplines to add new compression, dehydration and metering units that integrate with the existing cavern infrastructure.",
+      "Scope covered concept selection, permitting documentation, detailed design packages, vendor coordination and commissioning supervision. Safety upgrades included SIL assessments, emergency shutdown architecture and functional testing protocols aligned to EN standards.",
+      "The project introduced a structured documentation workflow with digital review cycles, enabling the client to maintain traceability across revisions and preparing the facility for future capacity increases."
+    ],
+    "heroImage": {
+      "src": "/media/projects/storage-facility.png",
+      "alt": "Compression and dehydration units at Banatski Dvor gas storage"
+    },
+    "gallery": [
+      {
+        "src": "/media/projects/storage-facility.png",
+        "alt": "Overview of the upgraded gas storage facility"
+      },
+      {
+        "src": "/media/projects/modular-station.png",
+        "alt": "Prefabricated process skids prepared for installation"
+      },
+      {
+        "src": "/media/projects/process-upgrade.png",
+        "alt": "Control room layout review during commissioning"
+      }
+    ],
+    "relatedSlugs": [
+      "modular-pressure-network",
+      "petrochemical-process-upgrade"
+    ],
+    "metadata": {
+      "internalId": "PRJ-001",
+      "status": "published",
+      "projectManager": "Milena Kostic",
+      "priority": "flagship",
+      "tags": ["storage", "compression", "commissioning"]
+    }
+  },
+  {
+    "slug": "modular-pressure-network",
+    "name": "Modular gas pressure regulating station network",
+    "shortDescription": "Standardised pressure regulating stations engineered for rapid deployment across utility network, covering civil, mechanical and electrical packages.",
+    "client": "Regional gas distribution utility",
+    "category": "Distribution",
+    "year": 2023,
+    "description": [
+      "To support network modernisation, Neopetrol Inzenjering developed a catalogue of modular gas pressure regulating stations. Each module streamlines civil foundations, mechanical skids, electrical controls and telemetry integration for rapid site deployment.",
+      "Engineering deliverables included structural calculations, piping isometrics, instrumentation hook-up diagrams and PLC logic narratives. Factory acceptance testing procedures were prepared to standardise quality across batches and reduce site commissioning windows.",
+      "The modular approach allows the utility to scale installations while maintaining consistent documentation and compliance with local and EU regulations."
+    ],
+    "heroImage": {
+      "src": "/media/projects/modular-station.png",
+      "alt": "Modular gas pressure regulating station assembled for deployment"
+    },
+    "gallery": [
+      {
+        "src": "/media/projects/modular-station.png",
+        "alt": "Exterior view of modular regulating station"
+      },
+      {
+        "src": "/media/projects/storage-facility.png",
+        "alt": "Mechanical skid during integration testing"
+      },
+      {
+        "src": "/media/projects/process-upgrade.png",
+        "alt": "Control cabinet quality inspection"
+      }
+    ],
+    "relatedSlugs": [
+      "banatski-dvor-storage-expansion",
+      "petrochemical-process-upgrade"
+    ],
+    "metadata": {
+      "internalId": "PRJ-002",
+      "status": "published",
+      "projectManager": "Stefan Zoric",
+      "priority": "portfolio",
+      "tags": ["distribution", "standardisation", "telemetry"]
+    }
+  },
+  {
+    "slug": "petrochemical-process-upgrade",
+    "name": "Process upgrade at petrochemical complex",
+    "shortDescription": "Revamp of process units with new instrumentation, control logic and safety interlocks, ensuring compliance with latest EU directives.",
+    "client": "Petrochemical operator",
+    "category": "Petrochemical",
+    "year": 2022,
+    "description": [
+      "Neopetrol Inzenjering supported a major petrochemical complex in upgrading key process units to improve throughput and compliance. The multidisciplinary team delivered new instrumentation layout, control logic design and electrical distribution upgrades within tight shutdown windows.",
+      "Detailed engineering covered hazardous area classification, cable routing, loop diagrams and integration with the distributed control system. Safety instrumented systems were reassessed with verification calculations and updated cause-and-effect matrices.",
+      "Commissioning supervisors coordinated site teams to execute functional testing, loop checks and documentation handover, ensuring the plant returned to operation on schedule with enhanced monitoring capability."
+    ],
+    "heroImage": {
+      "src": "/media/projects/process-upgrade.png",
+      "alt": "Process upgrade site with new instrumentation installed"
+    },
+    "gallery": [
+      {
+        "src": "/media/projects/process-upgrade.png",
+        "alt": "Overview of upgraded process unit"
+      },
+      {
+        "src": "/media/projects/storage-facility.png",
+        "alt": "Commissioning team performing loop checks"
+      },
+      {
+        "src": "/media/projects/modular-station.png",
+        "alt": "Prefabricated instrumentation panels ready for installation"
+      }
+    ],
+    "relatedSlugs": [
+      "banatski-dvor-storage-expansion",
+      "modular-pressure-network"
+    ],
+    "metadata": {
+      "internalId": "PRJ-003",
+      "status": "published",
+      "projectManager": "Vladimir Pavlov",
+      "priority": "portfolio",
+      "tags": ["petrochemical", "instrumentation", "turnaround"]
+    }
+  }
+]

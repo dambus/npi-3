@@ -27,12 +27,14 @@
 - `ContactForm` / `ApplyForm`: two-column on desktop, stacked on mobile; integrate validation states with Tailwind error styles.
 - `FeaturedServicesSection`: single merged services band. Top block: intro copy left, featured trio of image-driven cards right/stacked with per-card accent gradients. Middle CTA: horizontal gradient panel with left-aligned messaging, vertically stacked steps timeline, and luminous secondary button. Bottom grid: detailed services cards share height, no tinted icon background by default (`iconStyle="none"`).
 - `ProjectsTeaserSection`: headline and description introduce the references section, followed by centred About-style orbit counters. Project cards sit below in a responsive grid with brand-gradient industry tags and a ghost “See all projects” button.
-- `FooterCTA`: inverse band with primary CTA for PDF download (matching contact form button styling) and secondary ghost button linking to contact form.
+- `FooterPrimary` (`SiteFooter`): dark navy band using `src/assets/footer/footer.jpg` at low opacity beneath radial gradients. Top row holds phone/email/hours as inline items with circular icon badges and slim vertical dividers on desktop (no card backgrounds). Main grid: brand logo image + description + contact list + download CTA on the left, two navigation columns on the right. Footer remains linkable to `/` without hover color shift; download CTA uses ghost button variant.
+- `FooterCTA`: inverse band with primary CTA for PDF download (matching contact form button styling) and secondary ghost button linking to contact form. (Use only if additional mid-page CTA required; main footer already includes download link.)
 
 ## Imagery & Media
 - Source hero/background images from `input data/design`; convert to WebP (1600px width) and provide fallback if necessary.
 - Maintain aspect ratios: project cards 3:2, logo tiles 1:1, team imagery 4:3.
 - Store optimized assets under `public/media` or `src/assets`; document naming convention (`project_slug-hero.webp`).
+- Footer background image lives at `src/assets/footer/footer.jpg`; apply 30–40% opacity with blend overlay so typography remains readable.
 - Provide descriptive alt text referencing engineering context (e.g., “Process piping 3D model for refinery revamp”).
 
 ## Component System

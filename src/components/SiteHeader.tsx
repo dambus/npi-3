@@ -59,9 +59,7 @@ const navLinks = [
   { label: 'Home', to: '/' },
   { label: 'About us', to: '/about' },
   { label: 'Services', to: '/services' },
-  { label: 'Industries', to: '/industries' },
   { label: 'Projects', to: '/projects' },
-  { label: 'Blog', to: '/blog' },
   { label: 'Contact', to: '/contact' },
 ]
 

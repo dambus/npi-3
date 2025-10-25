@@ -71,3 +71,10 @@ export default defineConfig([
   },
 ])
 ```
+
+## cPanel deployment notes
+
+- The `.cpanel.yml` script assumes the subdomain document root is `/home/dambusns/public_html/npi`. Update the path if the subdomain points elsewhere (Manage Subdomains → Document Root).
+- After each push, cPanel runs `npm install` and `npm run build` inside the Git repository, then syncs `dist/` into the document root with `rsync`. The generated `.htaccess` is included in that sync.
+- If deployments stay in the *Queued* state, open **cPanel → Git Version Control → History** and review the latest log under `/home/dambusns/.cpanel/logs/`. Typical causes are an incorrect `DEPLOYPATH` or a missing Node.js version for `npm`.
+- When adjusting the docroot path, run `Deploy HEAD Commit` again. You can clear an old queue entry by clicking **Cancel** next to the stuck deployment before redeploying.

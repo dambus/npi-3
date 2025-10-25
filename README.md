@@ -74,7 +74,7 @@ export default defineConfig([
 
 ## cPanel deployment notes
 
-- The `.cpanel.yml` script assumes the subdomain document root is `/home/dambusns/public_html/npi`. Update the path if the subdomain points elsewhere (Manage Subdomains → Document Root).
-- After each push, cPanel runs `npm install` and `npm run build` inside the Git repository, then syncs `dist/` into the document root with `rsync`. The generated `.htaccess` is included in that sync.
-- If deployments stay in the *Queued* state, open **cPanel → Git Version Control → History** and review the latest log under `/home/dambusns/.cpanel/logs/`. Typical causes are an incorrect `DEPLOYPATH` or a missing Node.js version for `npm`.
-- When adjusting the docroot path, run `Deploy HEAD Commit` again. You can clear an old queue entry by clicking **Cancel** next to the stuck deployment before redeploying.
+- The `.cpanel.yml` script assumes the subdomain document root is `/home/dambusns/public_html/npi`. Update the path if the subdomain points elsewhere (Manage Subdomains → Document Root). The script aborts if `DEPLOYPATH` is set to the account root (`public_html`) to avoid erasing unrelated content.
+- After each push, cPanel runs `npm install` and `npm run build` inside the Git repository, then syncs `dist/` into the document root with `rsync` (without `--delete`) so existing files that are not part of the build remain intact. The generated `.htaccess` ships with the build output.
+- If a deployment remains in the *Queued* state, open **cPanel → Git Version Control → History**, click the stuck run, and download the log from `/home/dambusns/.cpanel/logs/queue_runner.log`. Cancel the queued job, resolve the reported error (common causes are a busy queue runner, missing Node.js, or permissions in the document root), then trigger **Deploy HEAD Commit** again.
+- When adjusting the docroot path or after resolving a failure, pull the latest changes into the cPanel-managed clone and re-run **Deploy HEAD Commit**.

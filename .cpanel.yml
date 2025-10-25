@@ -2,7 +2,8 @@
 deployment:
   tasks:
     - export DEPLOYPATH=/home/dambusns/public_html/npi
-    - test -d "$DEPLOYPATH" || mkdir -p "$DEPLOYPATH"
+    - if [ "$DEPLOYPATH" = "/home/dambusns/public_html" ]; then echo "Refusing to deploy to account root. Update DEPLOYPATH in .cpanel.yml."; exit 1; fi
+    - mkdir -p "$DEPLOYPATH"
     - npm install --no-audit --no-fund
     - npm run build
-    - rsync -a --delete --exclude=.well-known/ dist/ $DEPLOYPATH/
+    - rsync -a --exclude=.well-known/ dist/ "$DEPLOYPATH"/

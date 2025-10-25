@@ -6,3 +6,4 @@ deployment:
     - npm install
     - npm run build
     - /bin/cp -R dist/* $DEPLOYPATH
+    - /bin/cp public/.htaccess $DEPLOYPATH/.htaccess

@@ -11,23 +11,26 @@ public_folder: /media
 publish_mode: simple
 
 collections:
-  - label: Projects
+  - name: projects
+    label: Projects
     label_singular: Project
-    name: projects
-    file: src/data/projects.json
-    format: json
     editor:
       preview: false
-    fields:
-      - label: Projects
-        name: projects
-        widget: list
-        label_singular: Project
-        summary: "{{name}} ({{year}})"
-        allow_add: true
-        collapsed: true
-        identifier_field: slug
+    files:
+      - name: projectsData
+        label: Projects Data
+        file: src/data/projects.json
+        format: json
         fields:
+          - label: Projects
+            name: projects
+            widget: list
+            label_singular: Project
+            summary: "{{fields.name}} ({{fields.year}})"
+            allow_add: true
+            collapsed: true
+            identifier_field: slug
+            fields:
           - label: Name
             name: name
             widget: string

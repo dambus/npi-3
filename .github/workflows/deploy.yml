@@ -30,7 +30,7 @@ jobs:
           server: ${{ secrets.CPANEL_HOST }}
           username: ${{ secrets.CPANEL_USERNAME }}
           password: ${{ secrets.CPANEL_PASSWORD }}
-          server-dir: ${{ secrets.CPANEL_TARGET_DIR }}
+          server-dir: ${{ endsWith(secrets.CPANEL_TARGET_DIR, '/') && secrets.CPANEL_TARGET_DIR || format('{0}/', secrets.CPANEL_TARGET_DIR) }}
           protocol: ftp
           port: 21
           local-dir: dist/

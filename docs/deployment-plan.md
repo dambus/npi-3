@@ -45,8 +45,8 @@ Checklist & Sequence
 
 6. Optional: Decap (Netlify) CMS Integration (In progress)  
    - Static admin UI:
-     - `public/admin/index.html` loads Decap CMS.
-     - `public/admin/config.yml` defines the content model and Git backend.
+     - `public/admin/index.html` loads Decap CMS and bootstraps the config inline (avoids cPanel 404s for `.yml` files).
+     - `public/admin/config.yml` remains in the repo for reference/editing; keep it in sync with the inline config when fields change.
    - Backend authentication:
      - Configure a GitHub OAuth application (Settings → Developer settings → OAuth Apps).  
        Use `https://npi.milandjumic.dev/admin/` for both Homepage and Authorization callback.  

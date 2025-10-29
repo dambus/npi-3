@@ -153,21 +153,15 @@
 
       const initializeCMS = () => {
         if (!window.CMS) {
-          console.error('Decap CMS failed to load.')
+          window.requestAnimationFrame(initializeCMS)
           return
         }
-
         window.CMS.init({
           load_config_file: false,
           config: cmsConfig,
         })
       }
-
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', initializeCMS)
-      } else {
-        initializeCMS()
-      }
+      initializeCMS()
     </script>
   </body>
 </html>

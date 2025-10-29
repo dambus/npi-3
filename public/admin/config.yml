@@ -2,7 +2,7 @@ backend:
   name: github
   repo: dambus/npi-3
   branch: main
-  base_url: https://npi-oauth-proxy.onrender.com/ #render URL
+  base_url: https://npi-oauth-proxy.onrender.com # render URL
   auth_endpoint: /auth
   client_id: Ov23liATgrsKhrZZwzrC
 
@@ -26,10 +26,9 @@ collections:
             name: projects
             widget: list
             label_singular: Project
-            summary: "{{fields.name}} ({{fields.year}})"
+            summary: "{{name}} ({{year}})"
             allow_add: true
             collapsed: true
-            identifier_field: slug
             fields:
               - label: Name
                 name: name

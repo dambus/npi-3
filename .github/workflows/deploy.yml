@@ -33,5 +33,5 @@ jobs:
           server-dir: ${{ secrets.CPANEL_TARGET_DIR }}
           protocol: ftp
           port: 21
-          local-dir: dist
+          local-dir: dist/
           state-name: .ftp-deploy-sync-state.json

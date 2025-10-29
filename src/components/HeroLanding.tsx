@@ -29,7 +29,7 @@ export function HeroLanding() {
         <div className="grid gap-10 pb-10 lg:grid-cols-[minmax(0,1.05fr)_minmax(0,1.08fr)] lg:items-center lg:gap-16 xl:gap-20">
           <div className="flex flex-col gap-6">
             <span className="text-sm font-semibold uppercase tracking-[0.18em] text-white/60">
-              Engineering excellence since 2008
+              Engineering Excellence since 2008
             </span>
             <h1 className="font-display text-[3.35rem] font-extrabold leading-[1.02] text-white md:text-[3.75rem] xl:text-[4.2rem]">
               Designing reliable solutions for oil, gas & energy industries

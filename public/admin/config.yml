@@ -31,108 +31,108 @@ collections:
             collapsed: true
             identifier_field: slug
             fields:
-          - label: Name
-            name: name
-            widget: string
-          - label: Slug
-            name: slug
-            widget: string
-            hint: Used in URLs like /projects/<slug>. Leave blank to auto-generate from the name.
-            required: false
-          - label: Client
-            name: client
-            widget: string
-          - label: Category
-            name: category
-            widget: string
-          - label: Year
-            name: year
-            widget: number
-            value_type: int
-            min: 1900
-            max: 2100
-          - label: Short Description
-            name: shortDescription
-            widget: text
-          - label: Description
-            name: description
-            widget: list
-            label_singular: Paragraph
-            summary: "{{fields.paragraph | truncate(80)}}"
-            field:
-              label: Paragraph
-              name: paragraph
-              widget: text
-          - label: Hero Image
-            name: heroImage
-            widget: object
-            fields:
-              - label: Image
-                name: src
-                widget: image
-              - label: Alt Text
-                name: alt
+              - label: Name
+                name: name
                 widget: string
-          - label: Gallery
-            name: gallery
-            widget: list
-            label_singular: Image
-            summary: "{{fields.alt}}"
-            fields:
-              - label: Image
-                name: src
-                widget: image
-              - label: Alt Text
-                name: alt
+              - label: Slug
+                name: slug
                 widget: string
-              - label: Caption
-                name: caption
-                widget: string
+                hint: Used in URLs like /projects/<slug>. Leave blank to auto-generate from the name.
                 required: false
-          - label: Related Projects
-            name: relatedSlugs
-            widget: list
-            required: false
-            hint: Slugs of related projects to feature on the detail page carousel.
-            field:
-              label: Related Project Slug
-              name: slug
-              widget: string
-          - label: Metadata
-            name: metadata
-            widget: object
-            fields:
-              - label: Internal ID
-                name: internalId
+              - label: Client
+                name: client
                 widget: string
-              - label: Status
-                name: status
-                widget: select
-                options:
-                  - label: Published
-                    value: published
-                  - label: Draft
-                    value: draft
-              - label: Project Manager
-                name: projectManager
+              - label: Category
+                name: category
                 widget: string
-                required: false
-              - label: Priority
-                name: priority
-                widget: select
-                required: false
-                options:
-                  - label: Flagship
-                    value: flagship
-                  - label: Portfolio
-                    value: portfolio
-                  - label: Standard
-                    value: standard
-              - label: Tags
-                name: tags
+              - label: Year
+                name: year
+                widget: number
+                value_type: int
+                min: 1900
+                max: 2100
+              - label: Short Description
+                name: shortDescription
+                widget: text
+              - label: Description
+                name: description
+                widget: list
+                label_singular: Paragraph
+                summary: "{{fields.paragraph | truncate(80)}}"
+                field:
+                  label: Paragraph
+                  name: paragraph
+                  widget: text
+              - label: Hero Image
+                name: heroImage
+                widget: object
+                fields:
+                  - label: Image
+                    name: src
+                    widget: image
+                  - label: Alt Text
+                    name: alt
+                    widget: string
+              - label: Gallery
+                name: gallery
+                widget: list
+                label_singular: Image
+                summary: "{{fields.alt}}"
+                fields:
+                  - label: Image
+                    name: src
+                    widget: image
+                  - label: Alt Text
+                    name: alt
+                    widget: string
+                  - label: Caption
+                    name: caption
+                    widget: string
+                    required: false
+              - label: Related Projects
+                name: relatedSlugs
                 widget: list
                 required: false
+                hint: Slugs of related projects to feature on the detail page carousel.
                 field:
-                  label: Tag
-                  name: tag
+                  label: Related Project Slug
+                  name: slug
                   widget: string
+              - label: Metadata
+                name: metadata
+                widget: object
+                fields:
+                  - label: Internal ID
+                    name: internalId
+                    widget: string
+                  - label: Status
+                    name: status
+                    widget: select
+                    options:
+                      - label: Published
+                        value: published
+                      - label: Draft
+                        value: draft
+                  - label: Project Manager
+                    name: projectManager
+                    widget: string
+                    required: false
+                  - label: Priority
+                    name: priority
+                    widget: select
+                    required: false
+                    options:
+                      - label: Flagship
+                        value: flagship
+                      - label: Portfolio
+                        value: portfolio
+                      - label: Standard
+                        value: standard
+                  - label: Tags
+                    name: tags
+                    widget: list
+                    required: false
+                    field:
+                      label: Tag
+                      name: tag
+                      widget: string

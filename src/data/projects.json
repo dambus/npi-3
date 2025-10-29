@@ -1,134 +1,229 @@
-[
-  {
-    "slug": "banatski-dvor-storage-expansion",
-    "name": "Expansion of underground gas storage - Banatski Dvor",
-    "shortDescription": "Concept through detail design for compression, dehydration and metering units, including safety systems and integration with existing infrastructure.",
-    "client": "NIS / Gazprom Neft joint venture",
-    "category": "Gas storage",
-    "year": 2024,
-    "description.0": "Neopetrol Inzenjering delivered multidisciplinary support for the Banatski Dvor underground gas storage expansion. The team coordinated process, mechanical and electrical disciplines to add new compression, dehydration and metering units that integrate with the existing cavern infrastructure.",
-    "description.1": "Scope covered concept selection, permitting documentation, detailed design packages, vendor coordination and commissioning supervision. Safety upgrades included SIL assessments, emergency shutdown architecture and functional testing protocols aligned to EN standards.",
-    "description.2": "The project introduced a structured documentation workflow with digital review cycles, enabling the client to maintain traceability across revisions and preparing the facility for future capacity increases.",
-    "heroImage.src": "/media/projects/storage-facility.png",
-    "heroImage.alt": "Compression and dehydration units at Banatski Dvor gas storage",
-    "gallery.0.src": "/media/projects/storage-facility.png",
-    "gallery.0.alt": "Overview of the upgraded gas storage facility",
-    "gallery.1.src": "/media/projects/modular-station.png",
-    "gallery.1.alt": "Prefabricated process skids prepared for installation",
-    "gallery.2.src": "/media/projects/process-upgrade.png",
-    "gallery.2.alt": "Control room layout review during commissioning",
-    "relatedSlugs.0": "modular-pressure-network",
-    "relatedSlugs.1": "petrochemical-process-upgrade",
-    "metadata.internalId": "PRJ-001",
-    "metadata.status": "published",
-    "metadata.projectManager": "Milena Kostic",
-    "metadata.priority": "flagship",
-    "metadata.tags.0": "storage",
-    "metadata.tags.1": "compression",
-    "metadata.tags.2": "commissioning"
-  },
-  {
-    "slug": "modular-pressure-network",
-    "name": "Modular gas pressure regulating station network",
-    "shortDescription": "Standardised pressure regulating stations engineered for rapid deployment across utility network, covering civil, mechanical and electrical packages.",
-    "client": "Regional gas distribution utility",
-    "category": "Distribution",
-    "year": 2023,
-    "description.0": "To support network modernisation, Neopetrol Inzenjering developed a catalogue of modular gas pressure regulating stations. Each module streamlines civil foundations, mechanical skids, electrical controls and telemetry integration for rapid site deployment.",
-    "description.1": "Engineering deliverables included structural calculations, piping isometrics, instrumentation hook-up diagrams and PLC logic narratives. Factory acceptance testing procedures were prepared to standardise quality across batches and reduce site commissioning windows.",
-    "description.2": "The modular approach allows the utility to scale installations while maintaining consistent documentation and compliance with local and EU regulations.",
-    "heroImage.src": "/media/projects/modular-station.png",
-    "heroImage.alt": "Modular gas pressure regulating station assembled for deployment",
-    "gallery.0.src": "/media/projects/modular-station.png",
-    "gallery.0.alt": "Exterior view of modular regulating station",
-    "gallery.1.src": "/media/projects/storage-facility.png",
-    "gallery.1.alt": "Mechanical skid during integration testing",
-    "gallery.2.src": "/media/projects/process-upgrade.png",
-    "gallery.2.alt": "Control cabinet quality inspection",
-    "relatedSlugs.0": "banatski-dvor-storage-expansion",
-    "relatedSlugs.1": "petrochemical-process-upgrade",
-    "metadata.internalId": "PRJ-002",
-    "metadata.status": "published",
-    "metadata.projectManager": "Stefan Zoric",
-    "metadata.priority": "portfolio",
-    "metadata.tags.0": "distribution",
-    "metadata.tags.1": "standardisation",
-    "metadata.tags.2": "telemetry"
-  },
-  {
-    "slug": "petrochemical-process-upgrade",
-    "name": "Process upgrade at petrochemical complex",
-    "shortDescription": "Revamp of process units with new instrumentation, control logic and safety interlocks, ensuring compliance with latest EU directives.",
-    "client": "Petrochemical operator",
-    "category": "Petrochemical",
-    "year": 2022,
-    "description.0": "Neopetrol Inzenjering supported a major petrochemical complex in upgrading key process units to improve throughput and compliance. The multidisciplinary team delivered new instrumentation layout, control logic design and electrical distribution upgrades within tight shutdown windows.",
-    "description.1": "Detailed engineering covered hazardous area classification, cable routing, loop diagrams and integration with the distributed control system. Safety instrumented systems were reassessed with verification calculations and updated cause-and-effect matrices.",
-    "description.2": "Commissioning supervisors coordinated site teams to execute functional testing, loop checks and documentation handover, ensuring the plant returned to operation on schedule with enhanced monitoring capability.",
-    "heroImage.src": "/media/projects/process-upgrade.png",
-    "heroImage.alt": "Process upgrade site with new instrumentation installed",
-    "gallery.0.src": "/media/projects/process-upgrade.png",
-    "gallery.0.alt": "Overview of upgraded process unit",
-    "gallery.1.src": "/media/projects/storage-facility.png",
-    "gallery.1.alt": "Commissioning team performing loop checks",
-    "gallery.2.src": "/media/projects/modular-station.png",
-    "gallery.2.alt": "Prefabricated instrumentation panels ready for installation",
-    "relatedSlugs.0": "banatski-dvor-storage-expansion",
-    "relatedSlugs.1": "modular-pressure-network",
-    "metadata.internalId": "PRJ-003",
-    "metadata.status": "published",
-    "metadata.projectManager": "Vladimir Pavlov",
-    "metadata.priority": "portfolio",
-    "metadata.tags.0": "petrochemical",
-    "metadata.tags.1": "instrumentation",
-    "metadata.tags.2": "turnaround"
-  },
-  {
-    "slug": "modernization-sppd-plant",
-    "name": "Modernization of Southern SPPD plant",
-    "shortDescription": "The 2nd stage of the development of a reservoir pressure maintenance system in the northeastern part of the tourney oilfield. Modernization of the southern sppd plant.",
-    "client": "ZhaikMunai, Kazakhstan",
-    "category": "Oil Storage",
-    "year": 2013,
-    "description.0": "Gathering and preparation: formation water from UPN, water from artesian wells, further injection into the wells to increase oil extraction from the reservoir. Providing control and calculation of the volume of water injection in full and for each separate well.",
-    "description.1": "The scope of the project is the connection of artesian wells and transportation by pipelines to the gathering station, reconstruction of the gathering station for water preparation and transportation by pipelines to the injection wells ",
-    "description.2": "The project envisages three injection wells for injecting water. The water pressure in the system according to the wells is 200 bar. The volume of water injection is 2000 m3/day . ",
-    "heroImage.src": "/media/projects/process-upgrade.png",
-    "heroImage.alt": "Modular gas pressure regulating station assembled for deployment in Kazakhstan",
-    "gallery.0.src": "/media/projects/130870/130870-PML-P-104-DD-01.jpg",
-    "gallery.0.alt": "Model view of plant",
-    "gallery.1.src": "/media/projects/130870/130870-PML-P-104-DD-02.jpg",
-    "gallery.1.alt": "Model view of plant",
-    "gallery.2.src": "/media/projects/130870/130870-PML-P-104-DD-03.jpg",
-    "gallery.2.alt": "Model view of plant",
-    "relatedSlugs.0": "modular-pressure-network",
-    "relatedSlugs.1": "banatski-dvor-storage-expansion",
-    "metadata.internalId": 130870,
-    "metadata.status": "published",
-    "metadata.projectManager": "Slobodan Jankov",
-    "metadata.priority": "portfolio",
-    "metadata.tags.0": "storage",
-    "metadata.tags.1": "ins,mec,pr,civ"
-  },
-  {
-    "slug": "gas-lift-ifc",
-    "name": "Gas lift compressor facility & gas lift distributive system",
-    "shortDescription": "Development of gas reception system, gas compression system and gas distribution system to wells with gas lift.",
-    "client": "ZhaikMunai, Kazakhstan",
-    "category": "Gas extraction",
-    "year": 2013,
-    "description.0": "Development of gas reception system, gas compression system and gas distribution system to wells with gas lift.",
-    "description.1": "The scope of the project is the design of a continuous gas-lift system for artificial extraction of fluid when the well stops eruptive work. The total number of wells connected to the gas lift system is 6. The total gas flow for injection is 200,000.00 Nm3/day and the pressure is 130 bar.",
-    "description.2": "In order to fulfill the requirements of this project, it was necessary to develop the following large systems:\n1.\t Supply pipeline to the compressor station Q=600,000.00 Nm3/day p=35bar \n2.\t Installation and connection of 2 piston gas compressors \n3.\tDrainage system \n4.\tTransformer station \n5.\tPig launcher \n6.\tPipeline to the manifold and pipelines to the wells \n7.\tAutomatic fire extinguishing block valve station \n8.\tCathodic protection",
-    "heroImage.src": "/media/projects/1311117/13177117-02.jpg",
-    "gallery.0.src": "/media/projects/1311117/13177117-01.jpg",
-    "gallery.1.src": "/media/projects/1311117/13177117-02.jpg",
-    "gallery.2.src": "/media/projects/1311117/13177117-03.jpg",
-    "metadata.internalId": 1311117,
-    "metadata.status": "published",
-    "metadata.projectManager": "Milorad Jovi?i?",
-    "metadata.priority": "flagship",
-    "metadata.tags.0": "gas lit",
-    "metadata.tags.1": "natural gas, instrumentation"
-  }
-]
+{
+  "projects": [
+    {
+      "slug": "banatski-dvor-storage-expansion",
+      "name": "Expansion of underground gas storage - Banatski Dvor",
+      "shortDescription": "Concept through detail design for compression, dehydration and metering units, including safety systems and integration with existing infrastructure.",
+      "client": "NIS / Gazprom Neft joint venture",
+      "category": "Gas storage",
+      "year": 2024,
+      "description": [
+        "Neopetrol Inzenjering delivered multidisciplinary support for the Banatski Dvor underground gas storage expansion. The team coordinated process, mechanical and electrical disciplines to add new compression, dehydration and metering units that integrate with the existing cavern infrastructure.",
+        "Scope covered concept selection, permitting documentation, detailed design packages, vendor coordination and commissioning supervision. Safety upgrades included SIL assessments, emergency shutdown architecture and functional testing protocols aligned to EN standards.",
+        "The project introduced a structured documentation workflow with digital review cycles, enabling the client to maintain traceability across revisions and preparing the facility for future capacity increases."
+      ],
+      "heroImage": {
+        "src": "/media/projects/storage-facility.png",
+        "alt": "Compression and dehydration units at Banatski Dvor gas storage"
+      },
+      "gallery": [
+        {
+          "src": "/media/projects/storage-facility.png",
+          "alt": "Overview of the upgraded gas storage facility"
+        },
+        {
+          "src": "/media/projects/modular-station.png",
+          "alt": "Prefabricated process skids prepared for installation"
+        },
+        {
+          "src": "/media/projects/process-upgrade.png",
+          "alt": "Control room layout review during commissioning"
+        }
+      ],
+      "relatedSlugs": [
+        "modular-pressure-network",
+        "petrochemical-process-upgrade"
+      ],
+      "metadata": {
+        "internalId": "PRJ-001",
+        "status": "published",
+        "projectManager": "Milena Kostic",
+        "priority": "flagship",
+        "tags": [
+          "storage",
+          "compression",
+          "commissioning"
+        ]
+      }
+    },
+    {
+      "slug": "modular-pressure-network",
+      "name": "Modular gas pressure regulating station network",
+      "shortDescription": "Standardised pressure regulating stations engineered for rapid deployment across utility network, covering civil, mechanical and electrical packages.",
+      "client": "Regional gas distribution utility",
+      "category": "Distribution",
+      "year": 2023,
+      "description": [
+        "To support network modernisation, Neopetrol Inzenjering developed a catalogue of modular gas pressure regulating stations. Each module streamlines civil foundations, mechanical skids, electrical controls and telemetry integration for rapid site deployment.",
+        "Engineering deliverables included structural calculations, piping isometrics, instrumentation hook-up diagrams and PLC logic narratives. Factory acceptance testing procedures were prepared to standardise quality across batches and reduce site commissioning windows.",
+        "The modular approach allows the utility to scale installations while maintaining consistent documentation and compliance with local and EU regulations."
+      ],
+      "heroImage": {
+        "src": "/media/projects/modular-station.png",
+        "alt": "Modular gas pressure regulating station assembled for deployment"
+      },
+      "gallery": [
+        {
+          "src": "/media/projects/modular-station.png",
+          "alt": "Exterior view of modular regulating station"
+        },
+        {
+          "src": "/media/projects/storage-facility.png",
+          "alt": "Mechanical skid during integration testing"
+        },
+        {
+          "src": "/media/projects/process-upgrade.png",
+          "alt": "Control cabinet quality inspection"
+        }
+      ],
+      "relatedSlugs": [
+        "banatski-dvor-storage-expansion",
+        "petrochemical-process-upgrade"
+      ],
+      "metadata": {
+        "internalId": "PRJ-002",
+        "status": "published",
+        "projectManager": "Stefan Zoric",
+        "priority": "portfolio",
+        "tags": [
+          "distribution",
+          "standardisation",
+          "telemetry"
+        ]
+      }
+    },
+    {
+      "slug": "petrochemical-process-upgrade",
+      "name": "Process upgrade at petrochemical complex",
+      "shortDescription": "Revamp of process units with new instrumentation, control logic and safety interlocks, ensuring compliance with latest EU directives.",
+      "client": "Petrochemical operator",
+      "category": "Petrochemical",
+      "year": 2022,
+      "description": [
+        "Neopetrol Inzenjering supported a major petrochemical complex in upgrading key process units to improve throughput and compliance. The multidisciplinary team delivered new instrumentation layout, control logic design and electrical distribution upgrades within tight shutdown windows.",
+        "Detailed engineering covered hazardous area classification, cable routing, loop diagrams and integration with the distributed control system. Safety instrumented systems were reassessed with verification calculations and updated cause-and-effect matrices.",
+        "Commissioning supervisors coordinated site teams to execute functional testing, loop checks and documentation handover, ensuring the plant returned to operation on schedule with enhanced monitoring capability."
+      ],
+      "heroImage": {
+        "src": "/media/projects/process-upgrade.png",
+        "alt": "Process upgrade site with new instrumentation installed"
+      },
+      "gallery": [
+        {
+          "src": "/media/projects/process-upgrade.png",
+          "alt": "Overview of upgraded process unit"
+        },
+        {
+          "src": "/media/projects/storage-facility.png",
+          "alt": "Commissioning team performing loop checks"
+        },
+        {
+          "src": "/media/projects/modular-station.png",
+          "alt": "Prefabricated instrumentation panels ready for installation"
+        }
+      ],
+      "relatedSlugs": [
+        "banatski-dvor-storage-expansion",
+        "modular-pressure-network"
+      ],
+      "metadata": {
+        "internalId": "PRJ-003",
+        "status": "published",
+        "projectManager": "Vladimir Pavlov",
+        "priority": "portfolio",
+        "tags": [
+          "petrochemical",
+          "instrumentation",
+          "turnaround"
+        ]
+      }
+    },
+    {
+      "slug": "modernization-sppd-plant",
+      "name": "Modernization of Southern SPPD plant",
+      "shortDescription": "The 2nd stage of the development of a reservoir pressure maintenance system in the northeastern part of the tourney oilfield. Modernization of the southern sppd plant.",
+      "client": "ZhaikMunai, Kazakhstan",
+      "category": "Oil Storage",
+      "year": 2013,
+      "description": [
+        "Gathering and preparation: formation water from UPN, water from artesian wells, further injection into the wells to increase oil extraction from the reservoir. Providing control and calculation of the volume of water injection in full and for each separate well.",
+        "The scope of the project is the connection of artesian wells and transportation by pipelines to the gathering station, reconstruction of the gathering station for water preparation and transportation by pipelines to the injection wells ",
+        "The project envisages three injection wells for injecting water. The water pressure in the system according to the wells is 200 bar. The volume of water injection is 2000 m3/day . "
+      ],
+      "heroImage": {
+        "src": "/media/projects/process-upgrade.png",
+        "alt": "Modular gas pressure regulating station assembled for deployment in Kazakhstan"
+      },
+      "gallery": [
+        {
+          "src": "/media/projects/130870/130870-PML-P-104-DD-01.jpg",
+          "alt": "Model view of plant"
+        },
+        {
+          "src": "/media/projects/130870/130870-PML-P-104-DD-02.jpg",
+          "alt": "Model view of plant"
+        },
+        {
+          "src": "/media/projects/130870/130870-PML-P-104-DD-03.jpg",
+          "alt": "Model view of plant"
+        }
+      ],
+      "relatedSlugs": [
+        "modular-pressure-network",
+        "banatski-dvor-storage-expansion"
+      ],
+      "metadata": {
+        "internalId": "130870",
+        "status": "published",
+        "projectManager": "Slobodan Jankov",
+        "priority": "portfolio",
+        "tags": [
+          "storage",
+          "ins,mec,pr,civ"
+        ]
+      }
+    },
+    {
+      "slug": "gas-lift-ifc",
+      "name": "Gas lift compressor facility & gas lift distributive system",
+      "shortDescription": "Development of gas reception system, gas compression system and gas distribution system to wells with gas lift.",
+      "client": "ZhaikMunai, Kazakhstan",
+      "category": "Gas extraction",
+      "year": 2013,
+      "description": [
+        "Development of gas reception system, gas compression system and gas distribution system to wells with gas lift.",
+        "The scope of the project is the design of a continuous gas-lift system for artificial extraction of fluid when the well stops eruptive work. The total number of wells connected to the gas lift system is 6. The total gas flow for injection is 200,000.00 Nm3/day and the pressure is 130 bar.",
+        "In order to fulfill the requirements of this project, it was necessary to develop the following large systems:\n1.\t Supply pipeline to the compressor station Q=600,000.00 Nm3/day p=35bar \n2.\t Installation and connection of 2 piston gas compressors \n3.\tDrainage system \n4.\tTransformer station \n5.\tPig launcher \n6.\tPipeline to the manifold and pipelines to the wells \n7.\tAutomatic fire extinguishing block valve station \n8.\tCathodic protection"
+      ],
+      "heroImage": {
+        "src": "/media/projects/1311117/13177117-02.jpg",
+        "alt": "Gas lift compressor facility overview"
+      },
+      "gallery": [
+        {
+          "src": "/media/projects/1311117/13177117-01.jpg",
+          "alt": "Gas lift station exterior"
+        },
+        {
+          "src": "/media/projects/1311117/13177117-02.jpg",
+          "alt": "Compressor skid installation"
+        },
+        {
+          "src": "/media/projects/1311117/13177117-03.jpg",
+          "alt": "Control room layout"
+        }
+      ],
+      "metadata": {
+        "internalId": "1311117",
+        "status": "published",
+        "projectManager": "Milorad Jovicic",
+        "priority": "flagship",
+        "tags": [
+          "gas lift",
+          "natural gas",
+          "instrumentation"
+        ]
+      }
+    }
+  ]
+}

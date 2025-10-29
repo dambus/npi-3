@@ -30,8 +30,18 @@ export interface Project {
 }
 
 type RawProject = Record<string, unknown>
+let rawProjects: RawProject[] = []
 
-const projects: Project[] = (projectsData as RawProject[]).map(normalizeProject)
+if (Array.isArray(projectsData)) {
+  rawProjects = projectsData as RawProject[]
+} else if (projectsData && typeof projectsData === 'object') {
+  const maybeObject = projectsData as { projects?: RawProject[] }
+  if (Array.isArray(maybeObject.projects)) {
+    rawProjects = maybeObject.projects ?? []
+  }
+}
+
+const projects: Project[] = rawProjects.map(normalizeProject)
 
 export function getAllProjects(): Project[] {
   return projects

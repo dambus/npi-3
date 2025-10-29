@@ -4,16 +4,14 @@
     <meta charset="utf-8" />
     <meta name="viewport" content="width=device-width, initial-scale=1" />
     <title>Neopetrol CMS</title>
-    <link
-      rel="stylesheet"
-      href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css"
-    />
+    <link rel="stylesheet" href="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.css" />
+    <script>
+      window.CMS_MANUAL_INIT = true
+    </script>
   </head>
   <body>
     <script src="https://unpkg.com/decap-cms@^3.0.0/dist/decap-cms.js"></script>
     <script>
-      window.CMS_MANUAL_INIT = true
-
       const cmsConfig = {
         backend: {
           name: 'github',
@@ -153,10 +151,23 @@
         ],
       }
 
-      CMS.init({
-        load_config_file: false,
-        config: cmsConfig,
-      })
+      const initializeCMS = () => {
+        if (!window.CMS) {
+          console.error('Decap CMS failed to load.')
+          return
+        }
+
+        window.CMS.init({
+          load_config_file: false,
+          config: cmsConfig,
+        })
+      }
+
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', initializeCMS)
+      } else {
+        initializeCMS()
+      }
     </script>
   </body>
 </html>

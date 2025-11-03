@@ -77,6 +77,10 @@
     animation: orbit-two 18s ease-in-out infinite;
     z-index: 1;
   }
+
+  .animate-hero-stat-pulse {
+    animation: hero-stat-pulse 6s ease-in-out infinite;
+  }
 }
 
 @keyframes orbit-one {
@@ -106,5 +110,23 @@
   }
   100% {
     transform: translate3d(0, 0, 0) scale(1) rotate(6deg);
+  }
+}
+
+@keyframes hero-stat-pulse {
+  0%,
+  100% {
+    transform: scale(0.9);
+    opacity: 0.25;
+  }
+  45% {
+    transform: scale(1.08);
+    opacity: 0.7;
+  }
+}
+
+@media (prefers-reduced-motion: reduce) {
+  .animate-hero-stat-pulse {
+    animation: none;
   }
 }

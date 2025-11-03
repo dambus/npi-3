@@ -42,6 +42,7 @@
 - Base Tailwind theme tokens: `--color-brand-primary #0E1E2A`, `--color-brand-secondary #104CBA`, `--color-brand-accent #009E41`, `--color-brand-neutral #898889`; expose as `bg-brand-*`, `text-brand-*`, `border-brand-*` via Tailwind 4 theme API.
 - `Section` layout wrapper with props for background tone (`default`, `muted`, `brand`, `inverse`), optional eyebrow, headline slot, content grid (12/6/4 columns responsive).
 - `HeroPrimary` for marketing heroes: supports media on right/left, primary/secondary CTA buttons, optional badge, gradient overlay control.
+- `HeroPrimary` now supports inline video backgrounds via `background` slot and custom overlay tinting (`backgroundOverlayClassName`), plus circular animated statistic badges for emphasising key metrics.
 - `StatsStrip` for KPI counters with icon, value, label; multi-column responsive 4/2/1 layout.
 - `LogoWall` grid with optional `variant="carousel"`; accepts array of logos with monochrome toggle.
 - `ServiceCard` reusable card with icon slot, title, body, CTA; variant knobs: `outline`, `filled`, `ghost`.

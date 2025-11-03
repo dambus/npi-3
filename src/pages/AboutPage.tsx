@@ -99,6 +99,20 @@ export function AboutPage() {
           { label: 'Disciplines covered', value: '6' },
           { label: 'Projects delivered', value: '80+' },
         ]}
+        backgroundOverlayClassName="bg-gradient-to-br from-black/80 via-black/65 to-black/80 opacity-90"
+        background={
+          <video
+            className="h-full w-full object-cover"
+            src="/media/about/About_hero_video.mp4"
+            autoPlay
+            muted
+            defaultMuted
+            loop
+            playsInline
+            preload="auto"
+            aria-hidden="true"
+          />
+        }
       />
       <Section
         align="left"

@@ -10,6 +10,8 @@ Key goals:
 - Ensure published projects remain queryable by the public site without exposing drafts.
 - Prepare for future features such as generating company profiles with selected references.
 
+> **Migration note**: The repository now expects the `projects.is_active` column to exist. Run the latest migration (`supabase/migrations/20251030091306_projects_schema.sql`) with `supabase db push` (or execute it manually) to add the column before enabling the “Active listing” toggle in the admin console. Until the column is present, the frontend automatically treats every record as active.
+
 ## Tables
 
 ### `projects`
@@ -24,6 +26,7 @@ Key goals:
 - `priority text` (optional: `flagship`, `portfolio`, `standard`)
 - `project_manager text`
 - `year smallint`
+- `is_active boolean not null default true` — controls whether the project is surfaced in the public “Active project references” list.
 - `hero_asset_id uuid references project_assets(id) on delete set null`
 - `created_at timestamptz default now()`
 - `updated_at timestamptz default now()`

@@ -8,6 +8,7 @@ Overview
 - `/admin/projects/new` and `/admin/projects/:projectId` provide create/edit forms with hero + gallery management.
 - Media uploads target the `project_media` bucket using the convention `projects/{INTERNAL_CODE}/{slug}/filename.ext`.
 - Public pages (`/projects`, `/projects/:slug`, homepage teaser) fall back to the legacy JSON catalogue when Supabase is unavailable, so the site still renders while credentials are being provisioned.
+- `/projects/browse` exposes a catalogue-first view with live search, filters and card/table toggles; it relies on the same Supabase dataset as the marketing pages.
 
 Environment Requirements
 ------------------------
@@ -21,12 +22,12 @@ Using the Admin Pages
 2. Visit `/admin/projects`:
    - Use **Refresh** to re-query Supabase.
    - Use **New project** to open a blank editor.
-   - Manage status and metadata directly from the editor view.
+   - Toggle publish status from the list and control whether a project is **Active** (shown on the public “Active project references” grid) without leaving the table.
 3. In the editor:
    - Fill in internal code and slug first; uploads are organised with these values.
    - Upload images via **Upload assets** (multiple files allowed). They appear in the asset library once the upload completes.
    - Set a hero image and assemble the gallery (supports ordering and per-image captions).
-   - Save to persist (draft by default); set status to `published` when ready.
+   - Save to persist (draft by default); set status to `published` when ready and use **Active listing** to hide/show the project on the public highlights without affecting its published status.
 4. After saving a new project, the UI redirects to its `/admin/projects/:id` page so further edits can follow immediately.
 
 Migrating Existing JSON Projects
@@ -52,3 +53,4 @@ Operational Notes
 - Local development can proceed without Supabase; the UI will render JSON data and the admin list page shows a warning when Supabase IDs are missing.
 - To avoid duplicate fetches, hooks (`useProjectsQuery`, `useProjectBySlug`) memoise state internally and degrade gracefully when Supabase isn’t reachable.
 - All admin routes remain hidden from primary navigation and now require a Supabase session before rendering.
+- If the `projects.is_active` column has not yet been applied in Supabase, the frontend gracefully treats every project as active; once the migration runs, the active toggle starts persisting real values automatically.

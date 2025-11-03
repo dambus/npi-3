@@ -8,29 +8,96 @@ import {
   TagIcon,
   UserCircleIcon,
 } from '@heroicons/react/24/outline'
+import { useEffect, useMemo } from 'react'
 import { Link, Navigate, useParams } from 'react-router-dom'
 import Button from '../components/Button'
 import ProjectCard from '../components/ProjectCard'
 import ProjectGallery from '../components/ProjectGallery'
 import Section from '../components/Section'
-import {
-  getProjectAdjacency,
-  getProjectBySlug,
-  getRelatedProjects,
-} from '../data/projects'
+import { useProjectBySlug } from '../hooks/usePublishedProjects'
+import { renderableRichTextBlocks } from '../lib/richText'
 
 export function ProjectDetailPage() {
   const { slug } = useParams<{ slug: string }>()
-  const project = slug ? getProjectBySlug(slug) : undefined
+  const { project, projects, isLoading, error } = useProjectBySlug(slug)
+
+  useEffect(() => {
+    if (!slug) return
+    window.scrollTo({ top: 0, behavior: 'smooth' })
+  }, [slug])
+
+  const adjacency = useMemo(() => {
+    if (!project) {
+      return { previous: undefined, next: undefined }
+    }
+    const index = projects.findIndex((entry) => entry.slug === project.slug)
+    if (index === -1) {
+      return { previous: undefined, next: undefined }
+    }
+    return {
+      previous: index > 0 ? projects[index - 1] : undefined,
+      next: index < projects.length - 1 ? projects[index + 1] : undefined,
+    }
+  }, [project, projects])
+
+  const relatedProjects = useMemo(() => {
+    if (!project) {
+      return []
+    }
+    const relatedSlugs = project.relatedSlugs ?? []
+    const relatedBySlug = relatedSlugs
+      .map((relatedSlug) => projects.find((candidate) => candidate.slug === relatedSlug))
+      .filter((candidate): candidate is typeof project => Boolean(candidate))
+
+    const fallback = projects.filter((candidate) => candidate.slug !== project.slug)
+    const ordered = [...relatedBySlug, ...fallback]
+    const seen = new Set<string>()
+    const unique: typeof project[] = []
+
+    for (const candidate of ordered) {
+      if (seen.has(candidate.slug) || candidate.slug === project.slug) {
+        continue
+      }
+      seen.add(candidate.slug)
+      unique.push(candidate)
+      if (unique.length >= 3) {
+        break
+      }
+    }
+
+    return unique
+  }, [project, projects])
+
+  if (!slug) {
+    return <Navigate to="/not-found" replace />
+  }
+
+  if (error) {
+    return (
+      <Section align="left" className="bg-surface-default py-24">
+        <p
+          role="alert"
+          className="text-sm text-feedback-danger"
+        >
+          We couldn&apos;t load this project right now. Please try again later.
+        </p>
+      </Section>
+    )
+  }
+
+  if (isLoading) {
+    return (
+      <Section align="left" className="bg-surface-default py-24">
+        <p className="text-sm text-brand-neutral">Loading project...</p>
+      </Section>
+    )
+  }
 
   if (!project) {
     return <Navigate to="/not-found" replace />
   }
 
-  const { previous, next } = getProjectAdjacency(project.slug)
-  const relatedProjects = getRelatedProjects(project.slug, 3).filter(
-    (related) => related.slug !== project.slug,
-  )
+  const { previous, next } = adjacency
 
   const tagList = project.metadata.tags ?? []
 
@@ -112,8 +179,8 @@ export function ProjectDetailPage() {
                 Project overview
               </h2>
               <div className="space-y-4 text-base leading-relaxed text-brand-neutral">
-                {project.description.map((paragraph, index) => (
-                  <p key={index}>{paragraph}</p>
+                {renderableRichTextBlocks(project.description).map((block, index) => (
+                  <div key={index} className="space-y-2" dangerouslySetInnerHTML={{ __html: block }} />
                 ))}
               </div>
             </div>

@@ -1,33 +1,6 @@
 import projectsData from './projects.json' assert { type: 'json' }
-
-export interface ProjectImage {
-  src: string
-  alt: string
-  caption?: string
-}
-
-export interface ProjectMetadata {
-  internalId: string
-  status: string
-  projectManager?: string
-  priority?: string
-  tags?: string[]
-  [key: string]: unknown
-}
-
-export interface Project {
-  slug: string
-  name: string
-  shortDescription: string
-  client: string
-  category: string
-  year: number
-  description: string[]
-  heroImage: ProjectImage
-  gallery: ProjectImage[]
-  relatedSlugs?: string[]
-  metadata: ProjectMetadata
-}
+import type { Project, ProjectImage, ProjectMetadata, ProjectStatus } from './projectTypes'
+import { ensureRichTextHtml } from '../lib/richText'
 
 type RawProject = Record<string, unknown>
 let rawProjects: RawProject[] = []
@@ -110,9 +83,10 @@ function normalizeProject(raw: RawProject, index: number): Project {
   const year = toInteger(structured.year)
 
   const description = Array.isArray(structured.description)
-    ? (structured.description as unknown[]).filter(
-        (paragraph): paragraph is string => typeof paragraph === 'string' && paragraph.length > 0,
-      )
+    ? (structured.description as unknown[])
+        .filter((paragraph): paragraph is string => typeof paragraph === 'string' && paragraph.length > 0)
+        .map((paragraph) => ensureRichTextHtml(paragraph))
+        .filter((paragraph) => paragraph.length > 0)
     : []
 
   const gallery = Array.isArray(structured.gallery)
@@ -150,6 +124,7 @@ function normalizeProject(raw: RawProject, index: number): Project {
     gallery,
     relatedSlugs: relatedSlugs.length ? relatedSlugs : undefined,
     metadata,
+    isActive: metadata.isActive !== false,
   }
 }
 
@@ -183,8 +158,10 @@ function normalizeMetadata(value: unknown, index: number): ProjectMetadata {
     const metadata: ProjectMetadata = {
       ...raw,
       internalId: asString(raw.internalId, fallbackId),
-      status: asString(raw.status, 'draft'),
+      status: toProjectStatus(raw.status),
     }
+
+    metadata.isActive = typeof raw.isActive === 'boolean' ? raw.isActive : true
 
     if (typeof raw.projectManager === 'string' && raw.projectManager.length > 0) {
       metadata.projectManager = raw.projectManager
@@ -210,6 +187,7 @@ function normalizeMetadata(value: unknown, index: number): ProjectMetadata {
   return {
     internalId: fallbackId,
     status: 'draft',
+    isActive: true,
   }
 }
 
@@ -261,6 +239,17 @@ function toInteger(value: unknown, fallback = 0): number {
     }
   }
   return fallback
+}
+
+function toProjectStatus(value: unknown): ProjectStatus {
+  const normalized = asString(value).toLowerCase()
+  switch (normalized) {
+    case 'published':
+    case 'archived':
+      return normalized
+    default:
+      return 'draft'
+  }
 }
 
 function slugify(value: string): string {

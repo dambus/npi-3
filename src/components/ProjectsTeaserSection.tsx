@@ -1,10 +1,11 @@
-import { getAllProjects } from '../data/projects'
 import Button from './Button'
 import ProjectCard from './ProjectCard'
 import Section from './Section'
+import { usePublishedProjects } from '../hooks/usePublishedProjects'
 
 export function ProjectsTeaserSection() {
-  const featuredProjects = getAllProjects().slice(0, 3)
+  const { projects, isLoading, error } = usePublishedProjects()
+  const featuredProjects = projects.filter((project) => project.isActive !== false).slice(0, 3)
 
   return (
     <Section
@@ -54,27 +55,40 @@ export function ProjectsTeaserSection() {
         ))}
       </div>
 
-      <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-        {featuredProjects.map((project) => (
-          <ProjectCard
-            key={project.slug}
-            title={project.name}
-            industry={project.category}
-            description={project.shortDescription}
-            image={project.heroImage.src}
-            href={`/projects/${project.slug}`}
-          />
-        ))}
-      </div>
+      {isLoading ? (
+        <p className="text-sm text-brand-neutral">Loading featured projects...</p>
+      ) : error ? (
+        <div
+          role="alert"
+          className="rounded-xl border border-feedback-warning/20 bg-feedback-warning/5 p-4 text-sm text-feedback-warning"
+        >
+          Featured projects are temporarily unavailable.
+        </div>
+      ) : featuredProjects.length === 0 ? (
+        <p className="text-sm text-brand-neutral">Project highlights will appear here once published.</p>
+      ) : (
+        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+          {featuredProjects.map((project) => (
+            <ProjectCard
+              key={project.slug}
+              title={project.name}
+              industry={project.category}
+              description={project.shortDescription}
+              image={project.heroImage.src}
+              href={`/projects/${project.slug}`}
+            />
+          ))}
+        </div>
+      )}
 
       <div className="pt-2">
         <Button
           as="router-link"
-          to="/projects"
+          to="/projects/browse"
           variant="ghost"
           className="rounded-[--radius-pill] border border-brand-secondary/20 bg-white/80 px-6 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-secondary shadow-[0_20px_40px_rgba(12,30,70,0.12)] hover:border-brand-accent/40 hover:text-brand-accent/90"
         >
-          See all projects
+          Browse catalogue
         </Button>
       </div>
     </Section>

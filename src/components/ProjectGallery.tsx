@@ -4,7 +4,7 @@ import {
   XMarkIcon,
 } from '@heroicons/react/24/outline'
 import { useEffect, useRef, useState } from 'react'
-import type { ProjectImage } from '../data/projects'
+import type { ProjectImage } from '../data/projectTypes'
 import { cn } from '../lib/cn'
 
 export interface ProjectGalleryProps {

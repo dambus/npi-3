@@ -43,21 +43,10 @@ Checklist & Sequence
      3. Deployment: `SamKirkland/FTP-Deploy-Action@v4.3.4` uploads `dist/` to the target directory.
    - First run confirmed successful upload to the correct directory.
 
-6. Optional: Decap (Netlify) CMS Integration (In progress)  
-   - Static admin UI:
-     - `public/admin/index.html` loads Decap CMS and bootstraps the config inline (avoids cPanel 404s for `.yml` files).
-     - `public/admin/config.yml` remains in the repo for reference/editing; keep it in sync with the inline config when fields change.
-   - Backend authentication:
-     - Configure a GitHub OAuth application (Settings → Developer settings → OAuth Apps).  
-       Use `https://npi.milandjumic.dev/admin/` for both Homepage and Authorization callback.  
-     - Deploy a Decap CMS GitHub OAuth proxy (e.g., Render, Vercel, Fly.io).  
-       Update `base_url` + `auth_endpoint` in `config.yml` to point to that proxy.  
-       The proxy keeps the GitHub OAuth client secret server-side.
-   - Content model:
-     - Projects stored in `src/data/projects.json` under the `projects` array.  
-     - Fields exposed: name, slug, client, category, year, descriptions, hero image, gallery, related slugs, metadata (status, priority, tags).
-     - Media uploads: `media_folder: public/media`, `public_folder: /media` (matches existing assets).  
-   - Workflow: editors log into `/admin`, edits commit to `main`, which triggers the existing deploy action.
+6. Upcoming: Supabase CMS Integration (Planned)  
+   - Admin experience will be rebuilt on Supabase with row-level security instead of GitHub OAuth.  
+   - Keep `src/data/projects.json` as the single source of truth until the Supabase schema is ready; plan a one-time migration from this file.  
+   - Outline requirements: Supabase project setup, auth strategy, database schema for projects + media references, and migration tooling.
 
 7. Ongoing Workflow  
    - Development changes: edit locally, optionally run `npm run build`, push to `main`.  
@@ -66,7 +55,11 @@ Checklist & Sequence
 
 Open Questions / TODOs
 ----------------------
-- [ ] Stand up and configure the GitHub OAuth proxy for Decap CMS (`base_url` + `auth_endpoint`).
-- [ ] Create GitHub OAuth app and record credentials for the proxy.
-- [ ] Decide whether to enable editorial workflow (`publish_mode: editorial_workflow`) once multiple editors join.
+- [ ] Finalize Supabase architecture (auth model, tables, storage buckets) for the CMS.
+- [ ] Plan migration script from `src/data/projects.json` into Supabase tables.
+- [ ] Decide on media storage: Supabase storage vs. existing `public/media` assets.
 - [ ] (Optional) Add automated backups or version tagging before deploys for easier rollbacks.
+
+Known Issues (2025-10-30)
+-------------------------
+- Supabase tables contain project rows, but all `projects` queries from the React app still hang on the `Loading projects...` state. No browser console errors are reported; next debugging step is to inspect the network response for the `projects` RPC and confirm whether RLS is filtering results or if the relationship select string needs further adjustment.

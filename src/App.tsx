@@ -12,8 +12,14 @@ import LegalPrivacyPage from './pages/LegalPrivacyPage'
 import NotFoundPage from './pages/NotFoundPage'
 import ProjectDetailPage from './pages/ProjectDetailPage'
 import ProjectsPage from './pages/ProjectsPage'
+import BrowseProjectsPage from './pages/BrowseProjectsPage'
 import QualityPage from './pages/QualityPage'
 import ServicesPage from './pages/ServicesPage'
+import AdminProjectsListPage from './pages/admin/AdminProjectsListPage'
+import AdminProjectEditorPage from './pages/admin/AdminProjectEditorPage'
+import AdminLoginPage from './pages/admin/AdminLoginPage'
+import ProtectedRoute from './components/ProtectedRoute'
+import AdminRedirectPage from './pages/admin/AdminRedirectPage'
 
 function App() {
   return (
@@ -26,12 +32,20 @@ function App() {
           <Route path="/about" element={<AboutPage />} />
           <Route path="/services" element={<ServicesPage />} />
           <Route path="/projects" element={<ProjectsPage />} />
+          <Route path="/projects/browse" element={<BrowseProjectsPage />} />
           <Route path="/projects/:slug" element={<ProjectDetailPage />} />
           <Route path="/quality" element={<QualityPage />} />
           <Route path="/careers" element={<CareersPage />} />
           <Route path="/contact" element={<ContactPage />} />
           <Route path="/legal/privacy" element={<LegalPrivacyPage />} />
           <Route path="/legal/cookies" element={<LegalCookiesPage />} />
+          <Route path="/admin" element={<AdminRedirectPage />} />
+          <Route path="/admin/login" element={<AdminLoginPage />} />
+          <Route element={<ProtectedRoute />}>
+            <Route path="/admin/projects" element={<AdminProjectsListPage />} />
+            <Route path="/admin/projects/new" element={<AdminProjectEditorPage />} />
+            <Route path="/admin/projects/:projectId" element={<AdminProjectEditorPage />} />
+          </Route>
           <Route path="*" element={<NotFoundPage />} />
         </Routes>
       </main>

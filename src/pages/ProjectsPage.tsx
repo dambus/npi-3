@@ -1,9 +1,11 @@
+import { useEffect, useMemo, useState } from 'react'
 import ContactSection from '../components/ContactSection'
 import HeroPrimary from '../components/HeroPrimary'
 import ProjectCard from '../components/ProjectCard'
 import ProjectsTeaserSection from '../components/ProjectsTeaserSection'
 import Section from '../components/Section'
-import { getAllProjects } from '../data/projects'
+import Button from '../components/Button'
+import { usePublishedProjects } from '../hooks/usePublishedProjects'
 
 const upcomingCaseStudies = [
   {
@@ -60,7 +62,19 @@ const requestChecklist = [
 ]
 
 export function ProjectsPage() {
-  const projects = getAllProjects()
+  const { projects, isLoading, error } = usePublishedProjects()
+  const PAGE_SIZE = 6
+  const [visibleCount, setVisibleCount] = useState(PAGE_SIZE)
+
+  const activeProjects = useMemo(() => projects.filter((project) => project.isActive !== false), [projects])
+  const visibleProjects = useMemo(
+    () => activeProjects.slice(0, visibleCount),
+    [activeProjects, visibleCount],
+  )
+
+  useEffect(() => {
+    setVisibleCount(PAGE_SIZE)
+  }, [activeProjects.length])
 
   return (
     <>
@@ -76,18 +90,51 @@ export function ProjectsPage() {
         description="Browse a sample of live case studies. Each entry links to a detailed overview with scope, approach, and gallery."
         contentClassName="gap-12"
       >
-        <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {projects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              title={project.name}
-              industry={project.category}
-              description={project.shortDescription}
-              image={project.heroImage.src}
-              href={`/projects/${project.slug}`}
-            />
-          ))}
-        </div>
+        {isLoading ? (
+          <p className="text-sm text-brand-neutral">Loading projects...</p>
+        ) : error ? (
+          <div
+            role="alert"
+            className="rounded-xl border border-feedback-danger/20 bg-feedback-danger/5 p-4 text-sm text-feedback-danger"
+          >
+            Unable to load projects right now. Please try again later.
+          </div>
+        ) : activeProjects.length === 0 ? (
+          <p className="text-sm text-brand-neutral">No published projects are available yet.</p>
+        ) : (
+          <div className="space-y-6">
+            <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
+              {visibleProjects.map((project) => (
+                <ProjectCard
+                  key={project.slug}
+                  title={project.name}
+                  industry={project.category}
+                  description={project.shortDescription}
+                  image={project.heroImage.src}
+                  href={`/projects/${project.slug}`}
+                />
+              ))}
+            </div>
+            {visibleCount < activeProjects.length ? (
+              <div className="flex justify-center">
+                <Button
+                  as="button"
+                  type="button"
+                  variant="secondary"
+                  onClick={() => setVisibleCount((prev) => Math.min(prev + PAGE_SIZE, activeProjects.length))}
+                >
+                  Load more…
+                </Button>
+              </div>
+            ) : (
+              <div className="flex justify-center">
+                <Button as="router-link" to="/projects/browse" variant="ghost">
+                  Browse full catalogue
+                </Button>
+              </div>
+            )}
+          </div>
+        )}
       </Section>
       <Section
         align="left"

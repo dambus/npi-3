@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import {
   ClockIcon,
@@ -10,6 +10,7 @@ import {
 } from '@heroicons/react/24/outline'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import Button from './Button'
+import { useHeaderMetrics } from '../hooks/useHeaderMetrics'
 
 type ClassValue = string | false | null | undefined
 
@@ -97,62 +98,41 @@ export function SiteHeader() {
   const location = useLocation()
   const mobileMenuRef = useRef<HTMLDivElement | null>(null)
   const headerRef = useRef<HTMLElement | null>(null)
+  const { setHeaderElement } = useHeaderMetrics()
+  const scrollStateRef = useRef({
+    lastY: 0,
+    hidden: false,
+    scrolled: false,
+  })
+  const SCROLL_COMPACT_THRESHOLD = 140
+  const SCROLL_COMPACT_HYSTERESIS = 48 // hysteresis keeps header from oscillating when scroll position jitters near the top
+  const SCROLL_COMPACT_ENTER_THRESHOLD = SCROLL_COMPACT_THRESHOLD + SCROLL_COMPACT_HYSTERESIS
+  const SCROLL_COMPACT_EXIT_THRESHOLD = Math.max(
+    0,
+    SCROLL_COMPACT_THRESHOLD - SCROLL_COMPACT_HYSTERESIS,
+  )
+  const HIDE_SCROLL_THRESHOLD = 220
+  const TOGGLE_DELTA = 12
 
-  const lastYRef = useRef(0)
-  const hiddenRef = useRef(false)
-  const upAccumRef = useRef(0)
-  const scrolledRef = useRef(false)
-  const COMPACT_ENTER = 180
-  const COMPACT_EXIT = 120
-  const HIDE_THRESHOLD = 260
+  const assignHeaderRef = useCallback(
+    (node: HTMLElement | null) => {
+      headerRef.current = node
+      setHeaderElement(node)
+    },
+    [setHeaderElement],
+  )
 
   useEffect(() => {
-    hiddenRef.current = hidden
+    scrollStateRef.current.hidden = hidden
   }, [hidden])
 
   useEffect(() => {
-    scrolledRef.current = scrolled
+    scrollStateRef.current.scrolled = scrolled
   }, [scrolled])
 
   useEffect(() => {
     setIsClient(true)
   }, [])
-
-  const updateHeaderHeight = useCallback(() => {
-    if (typeof window === 'undefined') return
-    const headerEl = headerRef.current
-    if (!headerEl) return
-    const height = headerEl.getBoundingClientRect().height
-    document.documentElement.style.setProperty('--site-header-height', `${height}px`)
-  }, [])
-
-  useLayoutEffect(() => {
-    if (typeof window === 'undefined') return
-    updateHeaderHeight()
-  }, [updateHeaderHeight, scrolled, mobileOpen])
-
-  useEffect(() => {
-    if (typeof window === 'undefined') return
-    const headerEl = headerRef.current
-    if (!headerEl) return
-
-    updateHeaderHeight()
-
-    let observer: ResizeObserver | undefined
-    if (typeof ResizeObserver !== 'undefined') {
-      observer = new ResizeObserver(() => {
-        updateHeaderHeight()
-      })
-      observer.observe(headerEl)
-    }
-
-    window.addEventListener('resize', updateHeaderHeight)
-
-    return () => {
-      observer?.disconnect()
-      window.removeEventListener('resize', updateHeaderHeight)
-    }
-  }, [updateHeaderHeight])
 
   useEffect(() => {
     if (typeof document === 'undefined') return
@@ -218,101 +198,95 @@ export function SiteHeader() {
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    let ticking = false
+    const state = scrollStateRef.current
+    state.lastY = window.scrollY ?? window.pageYOffset ?? 0
+    state.scrolled = state.lastY > SCROLL_COMPACT_THRESHOLD
+    setScrolled(state.scrolled)
 
-    const getY = () => {
-      const winOffset = window.scrollY ?? window.pageYOffset ?? 0
-      const docOffset = document.documentElement?.scrollTop ?? 0
-      const bodyOffset = document.body?.scrollTop ?? 0
-      return Math.max(winOffset, docOffset, bodyOffset, 0)
+    if (state.lastY <= 0) {
+      state.hidden = false
+      setHidden(false)
+    }
+
+    let frame: number | null = null
+
+    const update = () => {
+      frame = null
+      const current = Math.max(window.scrollY ?? window.pageYOffset ?? 0, 0)
+      const delta = current - state.lastY
+
+      const nextScrolled = state.scrolled
+        ? current > SCROLL_COMPACT_EXIT_THRESHOLD
+        : current > SCROLL_COMPACT_ENTER_THRESHOLD
+      if (nextScrolled !== state.scrolled) {
+        state.scrolled = nextScrolled
+        setScrolled(nextScrolled)
+      }
+
+      if (mobileOpen) {
+        if (state.hidden) {
+          state.hidden = false
+          setHidden(false)
+        }
+        state.lastY = current
+        return
+      }
+
+      if (current <= 0) {
+        if (state.hidden) {
+          state.hidden = false
+          setHidden(false)
+        }
+        state.lastY = current
+        return
+      }
+
+      if (delta > TOGGLE_DELTA && current > HIDE_SCROLL_THRESHOLD) {
+        if (!state.hidden) {
+          state.hidden = true
+          setHidden(true)
+        }
+      } else if (delta < -TOGGLE_DELTA) {
+        if (state.hidden) {
+          state.hidden = false
+          setHidden(false)
+        }
+      }
+
+      state.lastY = current
     }
 
     const handleScroll = () => {
-      if (ticking) return
-      ticking = true
-      requestAnimationFrame(() => {
-        const y = getY()
-        const last = lastYRef.current
-        const dy = y - last
-        const atTop = y <= 0
-        const beyondFold = y >= (window.innerHeight || 0)
-        const hideThresholdReached = y > HIDE_THRESHOLD
-
-        let nextScrolled = scrolledRef.current
-        if (nextScrolled) {
-          if (y < COMPACT_EXIT) {
-            nextScrolled = false
-          }
-        } else if (y > COMPACT_ENTER) {
-          nextScrolled = true
-        }
-
-        if (nextScrolled !== scrolledRef.current) {
-          scrolledRef.current = nextScrolled
-          setScrolled(nextScrolled)
-        }
-
-        if (atTop) {
-          if (hiddenRef.current) setHidden(false)
-          upAccumRef.current = 0
-          lastYRef.current = y
-          ticking = false
-          return
-        }
-
-        if (dy > 0) {
-          upAccumRef.current = 0
-          if (!hiddenRef.current && hideThresholdReached) {
-            setHidden(true)
-          }
-        } else if (dy < 0) {
-          if (hiddenRef.current && beyondFold) {
-            upAccumRef.current += -dy
-            if (upAccumRef.current >= 16) {
-              setHidden(false)
-              upAccumRef.current = 0
-            }
-          } else if (!hiddenRef.current && !hideThresholdReached) {
-            setHidden(false)
-          }
-        }
-
-        lastYRef.current = y
-        ticking = false
-      })
+      if (frame !== null) return
+      frame = window.requestAnimationFrame(update)
     }
 
-    lastYRef.current = getY()
-    const initialScrolled = lastYRef.current > COMPACT_ENTER
-    scrolledRef.current = initialScrolled
-    setScrolled(initialScrolled)
-
+    update()
     window.addEventListener('scroll', handleScroll, { passive: true })
+
     return () => {
+      if (frame !== null) {
+        window.cancelAnimationFrame(frame)
+      }
       window.removeEventListener('scroll', handleScroll)
     }
-  }, [])
+  }, [mobileOpen])
 
   useEffect(() => {
     if (typeof window === 'undefined') return
 
-    const currentY = window.scrollY ?? window.pageYOffset ?? 0
-    lastYRef.current = currentY
+    const state = scrollStateRef.current
+    state.lastY = window.scrollY ?? window.pageYOffset ?? 0
+    state.hidden = false
+    state.scrolled = state.lastY > SCROLL_COMPACT_THRESHOLD
 
-    const nextScrolled = currentY > COMPACT_ENTER
-    scrolledRef.current = nextScrolled
-    setScrolled(nextScrolled)
-
-    if (currentY <= 0) {
-      hiddenRef.current = false
-      setHidden(false)
-      upAccumRef.current = 0
-    }
+    setHidden(false)
+    setScrolled(state.scrolled)
 
     if (mobileOpen) {
       setMobileOpen(false)
     }
-  }, [location.pathname]) // eslint-disable-line react-hooks/exhaustive-deps
+  }, [location.pathname]) // eslint-disable-line react-hooks-exhaustive-deps // eslint-disable-line react-hooks/exhaustive-deps
 
   const mobileNavLayer =
     isClient &&
@@ -416,7 +390,7 @@ export function SiteHeader() {
   return (
     <>
       <motion.header
-        ref={headerRef}
+        ref={assignHeaderRef}
       layout
       initial={false}
       transition={{ layout: { duration: 0.28, ease: 'easeOut' } }}

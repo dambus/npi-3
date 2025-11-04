@@ -1,4 +1,4 @@
-import { useEffect, useLayoutEffect } from 'react'
+import { useEffect } from 'react'
 import { useLocation } from 'react-router-dom'
 
 function ScrollToTop() {
@@ -22,23 +22,16 @@ function ScrollToTop() {
     return
   }, [])
 
-  useLayoutEffect(() => {
+  useEffect(() => {
     if (typeof window === 'undefined') {
       return
     }
-
-    const header = document.querySelector('[data-site-header]') as HTMLElement | null
-    const headerHeight = header?.getBoundingClientRect().height ?? 0
 
     if (hash) {
       const target = document.querySelector(hash) as HTMLElement | null
       if (target) {
         const targetTop = target.getBoundingClientRect().top + (window.scrollY ?? 0)
-        const offsetTop = Math.max(0, targetTop - headerHeight)
-        window.scrollTo({ top: offsetTop, left: 0, behavior: 'auto' })
-        window.requestAnimationFrame(() => {
-          window.dispatchEvent(new Event('scroll'))
-        })
+        window.scrollTo({ top: targetTop, left: 0, behavior: 'auto' })
         return
       }
     }
@@ -49,9 +42,6 @@ function ScrollToTop() {
       document.body.scrollTop = 0
     }
     window.scrollTo({ top: 0, left: 0, behavior: 'auto' })
-    window.requestAnimationFrame(() => {
-      window.dispatchEvent(new Event('scroll'))
-    })
   }, [pathname, hash])
 
   return null

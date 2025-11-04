@@ -23,6 +23,7 @@ export interface SectionProps {
   headerClassName?: string
   children?: ReactNode
   fullWidth?: boolean
+  padding?: 'default' | 'tight' | 'none'
 }
 
 export function Section({
@@ -38,6 +39,7 @@ export function Section({
   headerClassName,
   children,
   fullWidth = false,
+  padding = 'default',
 }: SectionProps) {
   const alignmentClasses =
     align === 'center'
@@ -54,10 +56,17 @@ export function Section({
       ? 'text-white/80'
       : 'text-brand-neutral'
 
+  const paddingClass =
+    padding === 'tight'
+      ? 'py-section-tight'
+      : padding === 'none'
+        ? undefined
+        : 'section-spacing'
+
   return (
     <Component
       id={id}
-      className={cn('section-spacing', variantStyles[variant], className)}
+      className={cn(variantStyles[variant], paddingClass, className)}
     >
       <div
         className={cn(

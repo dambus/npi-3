@@ -20,8 +20,17 @@ import AdminProjectEditorPage from './pages/admin/AdminProjectEditorPage'
 import AdminLoginPage from './pages/admin/AdminLoginPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRedirectPage from './pages/admin/AdminRedirectPage'
+import { HeaderMetricsProvider, useHeaderMetrics } from './hooks/useHeaderMetrics'
 
 function App() {
+  return (
+    <HeaderMetricsProvider>
+      <AppShell />
+    </HeaderMetricsProvider>
+  )
+}
+
+function AppShell() {
   return (
     <div className="page-shell flex min-h-screen flex-col text-brand-primary">
       <SiteHeader />

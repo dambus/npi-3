@@ -18,6 +18,7 @@ export interface HeroPrimaryProps {
   variant?: 'brand' | 'inverse'
   background?: ReactNode
   backgroundOverlayClassName?: string
+  fullHeight?: boolean
 }
 
 export function HeroPrimary({
@@ -31,16 +32,25 @@ export function HeroPrimary({
   variant = 'brand',
   background,
   backgroundOverlayClassName,
+  fullHeight = true,
 }: HeroPrimaryProps) {
   const overlayClasses =
     backgroundOverlayClassName ??
     'bg-gradient-to-br from-white/10 via-transparent to-black/40 opacity-70'
+  const heroMinHeightClass =
+    'min-h-[calc(100dvh-var(--site-header-height,72px))]'
 
   return (
     <Section
       variant={variant === 'inverse' ? 'inverse' : 'brand'}
-      className="relative isolate overflow-hidden"
-      contentClassName="grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-16"
+      className={cn(
+        'relative isolate overflow-hidden',
+        fullHeight && cn(heroMinHeightClass, 'py-0'),
+      )}
+      contentClassName={cn(
+        'grid gap-12 lg:grid-cols-[minmax(0,1fr)_minmax(0,0.9fr)] lg:gap-16',
+        fullHeight && 'py-16 md:py-20 lg:py-28',
+      )}
       align="left"
     >
       {background ? (

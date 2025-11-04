@@ -103,6 +103,19 @@ export function ServicesPage() {
         eyebrow="Services"
         title="Integrated engineering support from concept to commissioning."
         description="We align with your delivery frameworks and document control systems, supplying accountable engineering packages at every stage."
+        background={
+          <video
+            className="h-full w-full object-cover"
+            autoPlay
+            muted
+            loop
+            playsInline
+            aria-hidden="true"
+          >
+            <source src="/media/services/services_hero_video.mp4" type="video/mp4" />
+          </video>
+        }
+        backgroundOverlayClassName="bg-gradient-to-br from-[rgba(5,12,24,0.9)] via-[rgba(6,15,28,0.68)] to-[rgba(2,6,16,0.9)]"
       />
 
       <Section

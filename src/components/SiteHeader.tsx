@@ -1,5 +1,5 @@
 import { createPortal } from 'react-dom'
-import { useEffect, useRef, useState } from 'react'
+import { useCallback, useEffect, useLayoutEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
 import {
   ClockIcon,
@@ -96,6 +96,7 @@ export function SiteHeader() {
   const [isClient, setIsClient] = useState(false)
   const location = useLocation()
   const mobileMenuRef = useRef<HTMLDivElement | null>(null)
+  const headerRef = useRef<HTMLElement | null>(null)
 
   const lastYRef = useRef(0)
   const hiddenRef = useRef(false)
@@ -116,6 +117,42 @@ export function SiteHeader() {
   useEffect(() => {
     setIsClient(true)
   }, [])
+
+  const updateHeaderHeight = useCallback(() => {
+    if (typeof window === 'undefined') return
+    const headerEl = headerRef.current
+    if (!headerEl) return
+    const height = headerEl.getBoundingClientRect().height
+    document.documentElement.style.setProperty('--site-header-height', `${height}px`)
+  }, [])
+
+  useLayoutEffect(() => {
+    if (typeof window === 'undefined') return
+    updateHeaderHeight()
+  }, [updateHeaderHeight, scrolled, mobileOpen])
+
+  useEffect(() => {
+    if (typeof window === 'undefined') return
+    const headerEl = headerRef.current
+    if (!headerEl) return
+
+    updateHeaderHeight()
+
+    let observer: ResizeObserver | undefined
+    if (typeof ResizeObserver !== 'undefined') {
+      observer = new ResizeObserver(() => {
+        updateHeaderHeight()
+      })
+      observer.observe(headerEl)
+    }
+
+    window.addEventListener('resize', updateHeaderHeight)
+
+    return () => {
+      observer?.disconnect()
+      window.removeEventListener('resize', updateHeaderHeight)
+    }
+  }, [updateHeaderHeight])
 
   useEffect(() => {
     if (typeof document === 'undefined') return
@@ -379,6 +416,7 @@ export function SiteHeader() {
   return (
     <>
       <motion.header
+        ref={headerRef}
       layout
       initial={false}
       transition={{ layout: { duration: 0.28, ease: 'easeOut' } }}

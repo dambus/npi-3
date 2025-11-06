@@ -1,13 +1,7 @@
 import { createPortal } from 'react-dom'
 import { useCallback, useEffect, useRef, useState } from 'react'
 import { AnimatePresence, motion } from 'motion/react'
-import {
-  ClockIcon,
-  EnvelopeIcon,
-  MapPinIcon,
-  PhoneIcon,
-  XMarkIcon,
-} from '@heroicons/react/24/outline'
+import { XMarkIcon } from '@heroicons/react/24/outline'
 import { Link, NavLink, useLocation } from 'react-router-dom'
 import Button from './Button'
 import { useHeaderMetrics } from '../hooks/useHeaderMetrics'
@@ -62,32 +56,6 @@ const navLinks = [
   { label: 'Services', to: '/services' },
   { label: 'Projects', to: '/projects' },
   { label: 'Contact', to: '/contact' },
-]
-
-const topBarItems = [
-  {
-    icon: PhoneIcon,
-    label: 'Call us:',
-    value: '+381 11 405 52 90',
-    href: 'tel:+381114055290',
-  },
-  {
-    icon: EnvelopeIcon,
-    label: 'Email:',
-    value: 'office@npi.rs',
-    href: 'mailto:office@npi.rs',
-  },
-  {
-    icon: MapPinIcon,
-    label: 'Address:',
-    value: 'Bulevar Vudroa Vilsona 12, Beograd',
-    href: 'https://maps.google.com/?q=Bulevar%20Vudroa%20Vilsona%2012%20Beograd',
-  },
-  {
-    icon: ClockIcon,
-    label: 'Hours:',
-    value: '08:00 - 16:00 CET',
-  },
 ]
 
 export function SiteHeader() {
@@ -407,7 +375,7 @@ export function SiteHeader() {
         layout
         className={cx(
           'transition-all duration-300 ease-out',
-          scrolled ? 'py-2' : 'py-4',
+          scrolled ? 'py-3' : 'py-5',
         )}
       >
         <motion.div
@@ -431,60 +399,10 @@ export function SiteHeader() {
           <motion.div
             layout
             className={cx(
-              'flex flex-1 flex-col items-end transition-all duration-300 ease-out lg:items-stretch',
-              scrolled ? 'gap-2' : 'gap-4',
+              'flex w-full items-center justify-end gap-3 transition-all duration-300 ease-out',
+              scrolled ? 'py-1' : 'py-2',
             )}
           >
-            <AnimatePresence initial={false}>
-              {!scrolled && (
-                <motion.div
-                  key="top-bar"
-                  layout
-                  initial={{ opacity: 0, y: -10, height: 0 }}
-                  animate={{ opacity: 1, y: 0, height: 'auto' }}
-                  exit={{ opacity: 0, y: -12, height: 0 }}
-                  transition={{ duration: 0.25, ease: 'easeOut' }}
-                  className="hidden w-full flex-wrap items-center justify-end gap-x-6 gap-y-2 border-b border-white/10 pb-2 text-[11px] text-white/70 lg:flex"
-                  style={{ overflow: 'hidden' }}
-                >
-                  {topBarItems.map((item) => {
-                    const Icon = item.icon
-                    const inner = (
-                      <>
-                        <Icon className="h-3.5 w-3.5 text-brand-secondary" aria-hidden="true" />
-                        <span className="font-medium text-white/60">{item.label}</span>
-                        <span className="font-semibold text-white">{item.value}</span>
-                      </>
-                    )
-
-                    return (
-                      <span key={item.label} className="flex items-center gap-2">
-                        {item.href ? (
-                          <a
-                            href={item.href}
-                            className="flex items-center gap-2 text-white/70 transition hover:text-white"
-                          >
-                            {inner}
-                          </a>
-                        ) : (
-                          <span className="flex items-center gap-2 text-white/70">
-                            {inner}
-                          </span>
-                        )}
-                      </span>
-                    )
-                  })}
-                </motion.div>
-              )}
-            </AnimatePresence>
-
-            <motion.div
-              layout
-              className={cx(
-                'flex w-full items-center justify-end gap-3 transition-all duration-300 ease-out',
-                scrolled ? 'pt-1' : 'pt-2',
-              )}
-            >
               <nav aria-label="Primary" className="hidden flex-1 justify-end lg:flex">
                 <ul className="flex flex-wrap items-center gap-7 text-base font-semibold text-white/80">
                   {navLinks.map((link) => (
@@ -546,8 +464,7 @@ export function SiteHeader() {
             </motion.div>
           </motion.div>
         </motion.div>
-      </motion.div>
-      </motion.header>
+    </motion.header>
 
       {mobileNavLayer}
     </>

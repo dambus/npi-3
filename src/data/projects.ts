@@ -52,6 +52,9 @@ export function getRelatedProjects(slug: string, limit = 3): Project[] {
   const seen = new Set<string>()
 
   for (const project of ordered) {
+    if (!project.slug) {
+      continue
+    }
     if (seen.has(project.slug)) {
       continue
     }

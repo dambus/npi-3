@@ -120,7 +120,7 @@ export function AdminProjectEditorPage() {
   }, [isEditing, projectId])
 
   useEffect(() => {
-    if (!formState.internalCode || !formState.slug) {
+    if (!formState.internalCode) {
       setAssets([])
       return
     }
@@ -133,7 +133,6 @@ export function AdminProjectEditorPage() {
       try {
         const data = await listProjectAssets({
           internalCode: formState.internalCode,
-          slug: formState.slug,
         })
         if (!isMounted) return
         setAssets(data)
@@ -153,7 +152,7 @@ export function AdminProjectEditorPage() {
     return () => {
       isMounted = false
     }
-  }, [formState.internalCode, formState.slug, reconcileGallerySelections])
+  }, [formState.internalCode, reconcileGallerySelections])
 
   const heroAsset = useMemo(() => {
     if (!formState.heroAssetId) {
@@ -215,8 +214,8 @@ export function AdminProjectEditorPage() {
       return
     }
 
-    if (!formState.internalCode || !formState.slug) {
-      setAssetError('Set internal code and slug before uploading assets.')
+    if (!formState.internalCode) {
+      setAssetError('Set the internal code before uploading assets.')
       return
     }
 
@@ -228,13 +227,12 @@ export function AdminProjectEditorPage() {
         await uploadProjectAsset({
           file,
           internalCode: formState.internalCode,
-          slug: formState.slug,
+          slug: formState.slug || null,
           label: file.name,
         })
       }
       const refreshed = await listProjectAssets({
         internalCode: formState.internalCode,
-        slug: formState.slug,
       })
       setAssets(refreshed)
       reconcileGallerySelections(refreshed)
@@ -253,6 +251,7 @@ export function AdminProjectEditorPage() {
 
     try {
       const description = blocksFromEditorHtml(formState.descriptionHtml)
+      const normalizedSlug = formState.slug.trim() ? formState.slug.trim() : null
       const tags = splitTags(formState.tagsText)
       const yearValue = formState.year ? Number.parseInt(formState.year, 10) : undefined
       const gallery = gallerySelections.map((item, index) => ({
@@ -264,7 +263,7 @@ export function AdminProjectEditorPage() {
       if (isEditing && projectId) {
         await updateProject({
           id: projectId,
-          slug: formState.slug,
+          slug: normalizedSlug,
           internalCode: formState.internalCode,
           name: formState.name,
           shortDescription: formState.shortDescription,
@@ -283,7 +282,7 @@ export function AdminProjectEditorPage() {
         setSaveMessage('Project updated successfully.')
       } else {
         const created = await createProject({
-          slug: formState.slug,
+          slug: normalizedSlug,
           internalCode: formState.internalCode,
           name: formState.name,
           shortDescription: formState.shortDescription,
@@ -352,6 +351,7 @@ export function AdminProjectEditorPage() {
             <code className="mx-1 rounded bg-surface-muted px-2 py-0.5 text-xs text-brand-primary">
               projects/INTERNAL-CODE/slug/filename.ext
             </code>
+            (slugless projects use a <code className="mx-1 rounded bg-surface-muted px-2 py-0.5 text-xs text-brand-primary">listing-only</code> folder)
             — matching the Supabase <code className="mx-1 rounded bg-surface-muted px-2 py-0.5 text-xs text-brand-primary">project_media</code> bucket
             structure.
           </p>
@@ -413,7 +413,6 @@ export function AdminProjectEditorPage() {
               label="Slug"
               value={formState.slug}
               onChange={handleInputChange('slug')}
-              required
             />
             <button
               type="button"
@@ -422,6 +421,9 @@ export function AdminProjectEditorPage() {
             >
               Generate from name
             </button>
+            <p className="text-xs text-brand-neutral/70">
+              Leave blank to keep this project as a catalogue-only reference without a public case study page.
+            </p>
           </div>
           <FormField
             id="name"
@@ -625,7 +627,7 @@ export function AdminProjectEditorPage() {
   function bootstrapFormState(project: Project) {
     setFormState({
       name: project.name,
-      slug: project.slug,
+      slug: project.slug ?? '',
       internalCode: project.metadata.internalId,
       shortDescription: project.shortDescription,
       client: project.client,

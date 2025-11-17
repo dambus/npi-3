@@ -266,7 +266,7 @@ export function AdminProjectsListPage() {
             </thead>
             <tbody className="divide-y divide-brand-neutral/5">
               {sortedProjects.map((project) => {
-                const projectId = project.id ?? project.slug
+                const projectId = project.id ?? project.slug ?? project.metadata.internalId ?? project.name
                 const pending = project.id ? isRowPending(project.id) : false
                 const nextStatus = project.metadata.status === 'published' ? 'draft' : 'published'
 
@@ -278,7 +278,9 @@ export function AdminProjectsListPage() {
                     <td className="px-4 py-3">
                       <div className="flex flex-col gap-1">
                         <span className="font-semibold text-brand-primary">{project.name}</span>
-                        <span className="text-xs text-brand-neutral/70">{project.slug}</span>
+                        <span className="text-xs text-brand-neutral/70">
+                          {project.slug?.trim() || 'No case study slug'}
+                        </span>
                       </div>
                     </td>
                     <td className="px-4 py-3">

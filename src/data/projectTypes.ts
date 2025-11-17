@@ -45,7 +45,7 @@ export interface Project {
    * UUID primary key from Supabase. Optional for legacy JSON data.
    */
   id?: string
-  slug: string
+  slug: string | null
   name: string
   shortDescription: string
   client: string
@@ -94,7 +94,7 @@ export interface ProjectQueryOptions {
 }
 
 export interface CreateProjectPayload {
-  slug: string
+  slug?: string | null
   internalCode: string
   name: string
   shortDescription: string

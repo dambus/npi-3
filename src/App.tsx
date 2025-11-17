@@ -20,7 +20,7 @@ import AdminProjectEditorPage from './pages/admin/AdminProjectEditorPage'
 import AdminLoginPage from './pages/admin/AdminLoginPage'
 import ProtectedRoute from './components/ProtectedRoute'
 import AdminRedirectPage from './pages/admin/AdminRedirectPage'
-import { HeaderMetricsProvider, useHeaderMetrics } from './hooks/useHeaderMetrics'
+import { HeaderMetricsProvider } from './hooks/useHeaderMetrics'
 
 function App() {
   return (

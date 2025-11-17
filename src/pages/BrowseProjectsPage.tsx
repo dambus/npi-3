@@ -1,6 +1,7 @@
 import { useEffect, useMemo, useState } from 'react'
 import Button from '../components/Button'
 import Section from '../components/Section'
+import type { Project } from '../data/projectTypes'
 import { usePublishedProjects } from '../hooks/usePublishedProjects'
 
 const VIEW_MODES = {
@@ -55,6 +56,7 @@ export function BrowseProjectsPage() {
   const [searchTerm, setSearchTerm] = useState('')
   const [category, setCategory] = useState('all')
   const [year, setYear] = useState('all')
+  const [missingCaseStudyProject, setMissingCaseStudyProject] = useState<Project | null>(null)
 
   const normalizedSearch = searchTerm.trim().toLowerCase()
 
@@ -75,6 +77,12 @@ export function BrowseProjectsPage() {
   const resultLabel = filteredProjects.length === 1 ? 'project' : 'projects'
   const fieldClasses =
     'w-full rounded-2xl border border-brand-neutral/25 bg-surface-muted px-4 py-3 text-sm text-brand-primary shadow-inner focus:border-brand-secondary focus:outline-none focus:ring-2 focus:ring-brand-secondary/20'
+
+  const handleMissingCaseStudy = (project: Project) => {
+    setMissingCaseStudyProject(project)
+  }
+
+  const closeModal = () => setMissingCaseStudyProject(null)
 
   return (
     <>
@@ -197,54 +205,103 @@ export function BrowseProjectsPage() {
                 </tr>
               </thead>
               <tbody className="divide-y divide-brand-neutral/5">
-                {filteredProjects.map((project) => (
-                  <tr key={project.slug}>
-                    <td className="px-4 py-3">
-                      <span className="font-semibold text-brand-primary">{project.name}</span>
-                    </td>
-                    <td className="px-4 py-3 text-brand-neutral">{project.category || '-'}</td>
-                    <td className="px-4 py-3 text-brand-neutral">{project.client || '-'}</td>
-                    <td className="px-4 py-3 text-brand-neutral">{project.year || '-'}</td>
-                    <td className="px-4 py-3 text-right">
-                      <Button as="router-link" to={`/projects/${project.slug}`} variant="secondary" size="sm">
-                        View
-                      </Button>
-                    </td>
-                  </tr>
-                ))}
+                {filteredProjects.map((project) => {
+                  const projectSlug = (project.slug || '').trim()
+                  const hasCaseStudy = Boolean(projectSlug)
+                  return (
+                    <tr key={projectSlug || project.metadata.internalId || project.name}>
+                      <td className="px-4 py-3">
+                        <span className="font-semibold text-brand-primary">{project.name}</span>
+                      </td>
+                      <td className="px-4 py-3 text-brand-neutral">{project.category || '-'}</td>
+                      <td className="px-4 py-3 text-brand-neutral">{project.client || '-'}</td>
+                      <td className="px-4 py-3 text-brand-neutral">{project.year || '-'}</td>
+                      <td className="px-4 py-3 text-right">
+                        {hasCaseStudy ? (
+                          <Button as="router-link" to={`/projects/${projectSlug}`} variant="secondary" size="sm">
+                            View
+                          </Button>
+                        ) : (
+                          <Button variant="secondary" size="sm" onClick={() => handleMissingCaseStudy(project)}>
+                            View
+                          </Button>
+                        )}
+                      </td>
+                    </tr>
+                  )
+                })}
               </tbody>
             </table>
           </div>
         ) : (
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {filteredProjects.map((project) => (
-              <article
-                key={project.slug}
-                className="flex h-full flex-col gap-4 rounded-3xl border border-brand-neutral/15 bg-white p-6 shadow-[0_22px_55px_rgba(8,20,51,0.08)]"
-              >
-                <div className="space-y-2">
-                  <span className="text-sm text-brand-neutral/70">{project.category || 'Uncategorised'}</span>
-                  <h3 className="font-display text-xl font-semibold text-brand-primary">{project.name}</h3>
-                  <p className="text-sm leading-relaxed text-brand-neutral">{project.shortDescription}</p>
-                </div>
-                <div className="flex flex-wrap items-center gap-2 text-sm text-brand-neutral/80">
-                  <span className="rounded-full bg-brand-neutral/10 px-3 py-1">
-                    {project.client || 'Client NDA'}
-                  </span>
-                  <span className="rounded-full bg-brand-neutral/10 px-3 py-1">
-                    {project.year || 'Year TBD'}
-                  </span>
-                </div>
-                <div className="mt-auto flex justify-end">
-                  <Button as="router-link" to={`/projects/${project.slug}`} variant="link" className="text-brand-secondary">
-                    View case study
-                  </Button>
-                </div>
-              </article>
-            ))}
+            {filteredProjects.map((project) => {
+              const projectSlug = (project.slug || '').trim()
+              const hasCaseStudy = Boolean(projectSlug)
+              return (
+                <article
+                  key={projectSlug || project.metadata.internalId || project.name}
+                  className="flex h-full flex-col gap-4 rounded-3xl border border-brand-neutral/15 bg-white p-6 shadow-[0_22px_55px_rgba(8,20,51,0.08)]"
+                >
+                  <div className="space-y-2">
+                    <span className="text-sm text-brand-neutral/70">{project.category || 'Uncategorised'}</span>
+                    <h3 className="font-display text-xl font-semibold text-brand-primary">{project.name}</h3>
+                    <p className="text-sm leading-relaxed text-brand-neutral">{project.shortDescription}</p>
+                  </div>
+                  <div className="flex flex-wrap items-center gap-2 text-sm text-brand-neutral/80">
+                    <span className="rounded-full bg-brand-neutral/10 px-3 py-1">
+                      {project.client || 'Client NDA'}
+                    </span>
+                    <span className="rounded-full bg-brand-neutral/10 px-3 py-1">
+                      {project.year || 'Year TBD'}
+                    </span>
+                  </div>
+                  <div className="mt-auto flex justify-end">
+                    {hasCaseStudy ? (
+                      <Button as="router-link" to={`/projects/${projectSlug}`} variant="link" className="text-brand-secondary">
+                        View case study
+                      </Button>
+                    ) : (
+                      <Button variant="link" className="text-brand-secondary" onClick={() => handleMissingCaseStudy(project)}>
+                        View case study
+                      </Button>
+                    )}
+                  </div>
+                </article>
+              )
+            })}
           </div>
         )}
       </Section>
+      {missingCaseStudyProject ? (
+        <div
+          className="fixed inset-0 z-50 flex items-center justify-center bg-brand-primary/60 px-4 py-6 backdrop-blur-sm"
+          onClick={(event) => {
+            if (event.target === event.currentTarget) {
+              closeModal()
+            }
+          }}
+        >
+          <div
+            role="dialog"
+            aria-modal="true"
+            aria-labelledby="case-study-missing-title"
+            className="w-full max-w-md rounded-3xl border border-brand-neutral/20 bg-white p-8 text-center shadow-[0_32px_65px_rgba(8,20,44,0.35)]"
+          >
+            <h2 id="case-study-missing-title" className="font-display text-2xl font-semibold text-brand-primary">
+              Case study unavailable
+            </h2>
+            <p className="mt-3 text-sm leading-relaxed text-brand-neutral">
+              {missingCaseStudyProject.name} is currently listed without a published case study. Please explore other projects or check back later.
+            </p>
+            <div className="mt-6 flex justify-center">
+              <Button variant="primary" onClick={closeModal}>
+                Close
+              </Button>
+            </div>
+          </div>
+        </div>
+      ) : null}
     </>
   )
 }

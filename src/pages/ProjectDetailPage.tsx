@@ -27,21 +27,22 @@ export function ProjectDetailPage() {
   }, [slug])
 
   const adjacency = useMemo(() => {
-    if (!project) {
+    if (!project || !slug) {
       return { previous: undefined, next: undefined }
     }
-    const index = projects.findIndex((entry) => entry.slug === project.slug)
+    const caseStudyProjects = projects.filter((entry) => entry.slug?.trim())
+    const index = caseStudyProjects.findIndex((entry) => entry.slug === slug)
     if (index === -1) {
       return { previous: undefined, next: undefined }
     }
     return {
-      previous: index > 0 ? projects[index - 1] : undefined,
-      next: index < projects.length - 1 ? projects[index + 1] : undefined,
+      previous: index > 0 ? caseStudyProjects[index - 1] : undefined,
+      next: index < caseStudyProjects.length - 1 ? caseStudyProjects[index + 1] : undefined,
     }
-  }, [project, projects])
+  }, [project, projects, slug])
 
   const relatedProjects = useMemo(() => {
-    if (!project) {
+    if (!project || !slug) {
       return []
     }
     const relatedSlugs = project.relatedSlugs ?? []
@@ -49,13 +50,16 @@ export function ProjectDetailPage() {
       .map((relatedSlug) => projects.find((candidate) => candidate.slug === relatedSlug))
       .filter((candidate): candidate is typeof project => Boolean(candidate))
 
-    const fallback = projects.filter((candidate) => candidate.slug !== project.slug)
+    const fallback = projects.filter((candidate) => candidate.slug !== slug)
     const ordered = [...relatedBySlug, ...fallback]
     const seen = new Set<string>()
     const unique: typeof project[] = []
 
     for (const candidate of ordered) {
-      if (seen.has(candidate.slug) || candidate.slug === project.slug) {
+      if (!candidate.slug) {
+        continue
+      }
+      if (seen.has(candidate.slug) || candidate.slug === slug) {
         continue
       }
       seen.add(candidate.slug)
@@ -282,7 +286,7 @@ export function ProjectDetailPage() {
         <div className="flex flex-col gap-4 text-sm font-semibold uppercase tracking-[0.22em] text-brand-neutral md:flex-row md:items-center md:justify-between md:w-full">
           {/* <span>Browse other references</span> */}
           <div className="flex flex-col gap-3 sm:flex-row sm:items-center md:justify-between md:w-full md:gap-4">
-            {previous ? (
+            {previous?.slug ? (
               <Link
                 to={`/projects/${previous.slug}`}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-primary/10 bg-transparent px-4 py-2 text-xs sentence tracking-[0.12em] text-brand-primary transition hover:border-brand-accent/40 hover:text-brand-accent"
@@ -294,7 +298,7 @@ export function ProjectDetailPage() {
               <span className="text-brand-neutral/40">First case study</span>
             )}
 
-            {next ? (
+            {next?.slug ? (
               <Link
                 to={`/projects/${next.slug}`}
                 className="inline-flex items-center justify-center gap-2 rounded-full border border-brand-primary/10 bg-transparent px-4 py-2 text-xs uppercase tracking-[0.12em] text-brand-primary transition hover:border-brand-accent/40 hover:text-brand-accent"
@@ -318,16 +322,19 @@ export function ProjectDetailPage() {
           contentClassName="gap-12"
         >
           <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-            {relatedProjects.map((related) => (
-              <ProjectCard
-                key={related.slug}
-                title={related.name}
-                industry={related.category}
-                description={related.shortDescription}
-                image={related.heroImage.src}
-                href={`/projects/${related.slug}`}
-              />
-            ))}
+            {relatedProjects.map((related) => {
+              const relatedSlug = related.slug?.trim()
+              return (
+                <ProjectCard
+                  key={relatedSlug || related.id || related.metadata.internalId || related.name}
+                  title={related.name}
+                  industry={related.category}
+                  description={related.shortDescription}
+                  image={related.heroImage.src}
+                  href={relatedSlug ? `/projects/${relatedSlug}` : undefined}
+                />
+              )
+            })}
           </div>
         </Section>
       ) : null}

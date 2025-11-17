@@ -68,16 +68,19 @@ export function ProjectsTeaserSection() {
         <p className="text-sm text-brand-neutral">Project highlights will appear here once published.</p>
       ) : (
         <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-          {featuredProjects.map((project) => (
-            <ProjectCard
-              key={project.slug}
-              title={project.name}
-              industry={project.category}
-              description={project.shortDescription}
-              image={project.heroImage.src}
-              href={`/projects/${project.slug}`}
-            />
-          ))}
+          {featuredProjects.map((project) => {
+            const caseStudySlug = project.slug?.trim()
+            return (
+              <ProjectCard
+                key={caseStudySlug || project.id || project.metadata.internalId || project.name}
+                title={project.name}
+                industry={project.category}
+                description={project.shortDescription}
+                image={project.heroImage.src}
+                href={caseStudySlug ? `/projects/${caseStudySlug}` : undefined}
+              />
+            )
+          })}
         </div>
       )}
 

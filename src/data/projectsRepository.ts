@@ -341,7 +341,7 @@ export async function createProject(payload: CreateProjectPayload): Promise<Proj
   const includeActiveColumn = shouldIncludeActiveColumn()
 
   const baseInsertPayload: Record<string, unknown> = {
-    slug: payload.slug,
+    slug: payload.slug ?? null,
     internal_code: payload.internalCode,
     name: payload.name,
     short_description: payload.shortDescription,
@@ -421,7 +421,7 @@ export async function createProject(payload: CreateProjectPayload): Promise<Proj
 
   return {
     id: projectId,
-    slug: payload.slug,
+    slug: payload.slug ?? null,
     name: payload.name,
     shortDescription: payload.shortDescription,
     client: payload.client ?? '',
@@ -448,19 +448,43 @@ export async function updateProject(payload: UpdateProjectPayload): Promise<Proj
 
   const { id, ...rest } = payload
 
-  const updateFields = {
-    ...(rest.slug ? { slug: rest.slug } : {}),
-    ...(rest.internalCode ? { internal_code: rest.internalCode } : {}),
-    ...(rest.name ? { name: rest.name } : {}),
-    ...(rest.shortDescription ? { short_description: rest.shortDescription } : {}),
-    ...(rest.client !== undefined ? { client: rest.client ?? null } : {}),
-    ...(rest.category !== undefined ? { category: rest.category ?? null } : {}),
-    ...(rest.status ? { status: rest.status } : {}),
-    ...(rest.priority !== undefined ? { priority: rest.priority ?? null } : {}),
-    ...(rest.projectManager !== undefined ? { project_manager: rest.projectManager ?? null } : {}),
-    ...(rest.year !== undefined ? { year: rest.year ?? null } : {}),
-    ...(rest.heroAssetId !== undefined ? { hero_asset_id: rest.heroAssetId ?? null } : {}),
-    ...(rest.isActive !== undefined && shouldIncludeActiveColumn() ? { is_active: rest.isActive } : {}),
+  const updateFields: Record<string, unknown> = {}
+
+  if (rest.slug !== undefined) {
+    updateFields.slug = rest.slug ?? null
+  }
+  if (rest.internalCode) {
+    updateFields.internal_code = rest.internalCode
+  }
+  if (rest.name) {
+    updateFields.name = rest.name
+  }
+  if (rest.shortDescription) {
+    updateFields.short_description = rest.shortDescription
+  }
+  if (rest.client !== undefined) {
+    updateFields.client = rest.client ?? null
+  }
+  if (rest.category !== undefined) {
+    updateFields.category = rest.category ?? null
+  }
+  if (rest.status) {
+    updateFields.status = rest.status
+  }
+  if (rest.priority !== undefined) {
+    updateFields.priority = rest.priority ?? null
+  }
+  if (rest.projectManager !== undefined) {
+    updateFields.project_manager = rest.projectManager ?? null
+  }
+  if (rest.year !== undefined) {
+    updateFields.year = rest.year ?? null
+  }
+  if (rest.heroAssetId !== undefined) {
+    updateFields.hero_asset_id = rest.heroAssetId ?? null
+  }
+  if (rest.isActive !== undefined && shouldIncludeActiveColumn()) {
+    updateFields.is_active = rest.isActive
   }
 
   const { error } = await supabase.from('projects').update(updateFields).eq('id', id)
@@ -524,17 +548,11 @@ export async function updateProject(payload: UpdateProjectPayload): Promise<Proj
     return (await fetchProjectBySlug(rest.slug, { includeDrafts: true })) as Project
   }
 
-  const { data: updatedRecord, error: fetchError } = await supabase
-    .from('projects')
-    .select('slug')
-    .eq('id', id)
-    .maybeSingle()
-
-  if (fetchError || !updatedRecord) {
-    throw new Error(fetchError ? fetchError.message : 'Unable to resolve updated project slug')
+  const updatedProject = await fetchProjectById(id, { includeDrafts: true })
+  if (!updatedProject) {
+    throw new Error('Unable to resolve updated project')
   }
-
-  return (await fetchProjectBySlug(updatedRecord.slug, { includeDrafts: true })) as Project
+  return updatedProject
 }
 
 export async function deleteProject(id: string): Promise<void> {
@@ -575,7 +593,7 @@ export async function listProjectAssets(params: {
 export async function uploadProjectAsset(params: {
   file: File
   internalCode: string
-  slug: string
+  slug?: string | null
   label?: string
   altText?: string
 }): Promise<ProjectAsset> {
@@ -655,7 +673,7 @@ function mapProjectRows(rows: ProjectRow[]): Project[] {
 
     return {
       id: row.id,
-      slug: row.slug,
+      slug: row.slug ?? null,
       name: row.name,
       shortDescription: row.short_description,
       client: row.client ?? '',
@@ -678,7 +696,9 @@ function mapProjectRows(rows: ProjectRow[]): Project[] {
 
   const mapById = new Map<string, string>()
   for (const project of projects) {
-    mapById.set(project.id!, project.slug)
+    if (project.id && project.slug) {
+      mapById.set(project.id, project.slug)
+    }
   }
 
   return projects.map((projectWithInternal) => {
@@ -748,9 +768,11 @@ function mapProjectAssetToImage(
   }
 }
 
-function buildProjectFolder(internalCode: string, slug: string): string {
+function buildProjectFolder(internalCode: string, slug?: string | null): string {
   const normalizedCode = internalCode.trim().replace(/\s+/g, '-').toUpperCase()
-  const normalizedSlug = slug.trim().replace(/\s+/g, '-').toLowerCase()
+  const normalizedSlug = slug?.trim()
+    ? slug.trim().replace(/\s+/g, '-').toLowerCase()
+    : 'listing-only'
   return `projects/${normalizedCode}/${normalizedSlug}`
 }
 

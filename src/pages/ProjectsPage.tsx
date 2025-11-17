@@ -104,16 +104,19 @@ export function ProjectsPage() {
         ) : (
           <div className="space-y-6">
             <div className="grid gap-6 md:grid-cols-2 xl:grid-cols-3">
-              {visibleProjects.map((project) => (
-                <ProjectCard
-                  key={project.slug}
-                  title={project.name}
-                  industry={project.category}
-                  description={project.shortDescription}
-                  image={project.heroImage.src}
-                  href={`/projects/${project.slug}`}
-                />
-              ))}
+              {visibleProjects.map((project) => {
+                const caseStudySlug = project.slug?.trim()
+                return (
+                  <ProjectCard
+                    key={caseStudySlug || project.id || project.metadata.internalId || project.name}
+                    title={project.name}
+                    industry={project.category}
+                    description={project.shortDescription}
+                    image={project.heroImage.src}
+                    href={caseStudySlug ? `/projects/${caseStudySlug}` : undefined}
+                  />
+                )
+              })}
             </div>
             {visibleCount < activeProjects.length ? (
               <div className="flex justify-center">

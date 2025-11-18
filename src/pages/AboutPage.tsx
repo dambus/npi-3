@@ -2,37 +2,39 @@ import ContactSection from '../components/ContactSection'
 import HeroPrimary from '../components/HeroPrimary'
 import Section from '../components/Section'
 
-const growthHighlights = [
-  {
-    title: 'Energy and process roots',
-    description:
-      'Early programmes supported Naftna Industrija Srbije (NIS), the Novi Sad refinery, HIPOL in Odzaci, Zorka in Sabac, and Rafinerija Nafte Brod.',
-  },
-  {
-    title: 'Geographic expansion',
-    description:
-      'Cross-border teams delivered detailed design in Kazakhstan while strengthening domestic partnerships with Srbija Gas and StandardGas.',
-  },
+import deliveryImage from '../assets/services/timeline-delivery.jpg'
+import supervisionImage from '../assets/services/service-concept.jpg'
+import assuranceImage from '../assets/services/service-compliance.jpg'
+
+const disciplineMetrics = [
+  { value: '5', label: 'Disciplines in one workflow' },
+  { value: '30+', label: 'Engineers sharing templates' },
+  { value: '120+', label: 'Coordinated project packs' },
 ]
 
-const growthSnapshot = [
-  { label: '2008', value: 'Studio founded in Novi Sad - 3 engineers' },
-  { label: '2025', value: 'Regional delivery hub - 30+ engineers' },
+const deliveryMetrics = [
+  { value: '3', label: 'formal review gates' },
+  { value: '48h', label: 'markup turnaround' },
+  { value: '1200+', label: 'documents hosted digitally' },
 ]
 
-const departments = [
-  'Mechanical Engineering',
-  'Process (Technological) Engineering',
-  'Electrical Power Engineering',
-  'Automation & Instrumentation',
-  'Civil Engineering',
+const supervisionMetrics = [
+  { value: '24h', label: 'avg response to site queries' },
+  { value: '50+', label: 'site visits logged yearly' },
+  { value: '30+', label: 'commissionings assisted' },
+]
+
+const assuranceMetrics = [
+  { value: '4', label: 'ISO standards active' },
+  { value: '9', label: 'national license categories' },
+  { value: '10+', label: 'specialised software suites' },
 ]
 
 const isoCertifications = [
-  { code: 'ISO 9001', focus: 'Quality Management' },
-  { code: 'ISO 14001', focus: 'Environmental Management' },
-  { code: 'ISO 27001', focus: 'Information Security' },
-  { code: 'ISO 45001', focus: 'Occupational Health & Safety' },
+  { code: 'ISO 9001', focus: 'Quality' },
+  { code: 'ISO 14001', focus: 'Environment' },
+  { code: 'ISO 27001', focus: 'Information security' },
+  { code: 'ISO 45001', focus: 'Occupational safety' },
 ]
 
 const licenseCodes = [
@@ -47,43 +49,22 @@ const licenseCodes = [
   '09/4 no. 217-690/18',
 ]
 
-const softwareSuites = [
-  'Autodesk Plant 3D Design Suite',
-  'Autodesk AutoCAD Electrical / MEP',
-  'Autodesk Advanced Steel',
-  'Hexagon CAESAR II',
-  'Hexagon CADWorx',
-  'Chemstations ChemCAD',
-  'AspenTech HYSYS',
-  'Radimpex Tower',
-  'Urbano Ultimate',
-  'Gas Arc Construction',
-]
-
-const missionVision = [
-  {
-    title: 'Mission',
-    description:
-      'Deliver dependable engineering documentation and supervision that keeps industrial assets compliant, efficient, and safe.',
-  },
-  {
-    title: 'Vision',
-    description:
-      'Become the trusted engineering partner for regulated energy and process operators across the SEE region.',
-  },
-]
+const infinitySymbol = '\u221e';
 
 export function AboutPage() {
   return (
     <>
       <HeroPrimary
-        eyebrow="About Neopetrol Engineering"
-        title="Local roots, regional reach."
-        description="From a small team in Novi Sad to a multidisciplinary engineering company delivering complex energy and process projects across Southeast Europe."
+        eyebrow="About our studio"
+        title="Lean studio. Measured impact."
+        description="Seventeen years of industrial documentation, coordination, and technical supervision delivered by one focused team."
         stats={[
-          { label: 'Years in operation', value: '17' },
-          { label: 'Engineers', value: '30+' },
-          { label: 'ISO certifications', value: '4' },
+          { label: 'Years active', value: '17' },
+          { label: 'Disciplines in-house', value: '5' },
+          { label: 'Engineers', value: '27' },
+          {label: 'projects', value: '150+'},
+          {label: 'clients', value: '30+'},
+          {label: 'motivation', value: infinitySymbol},
         ]}
         backgroundOverlayClassName="bg-gradient-to-br from-black/85 via-black/70 to-black/85 opacity-95"
         background={
@@ -98,244 +79,244 @@ export function AboutPage() {
             aria-hidden="true"
           />
         }
-        // media={
-        //   <div className="flex h-full items-end justify-center rounded-[1.75rem] bg-gradient-to-br from-white/10 via-white/5 to-white/0 p-8 ring-1 ring-white/15">
-        //     <p className="text-center text-lg font-semibold uppercase tracking-[0.28em] text-white/80">
-        //       Built on discipline. Driven by knowledge.
-        //     </p>
-        //   </div>
-        // }
       />
 
       <Section
-        align="left"
-        title="From local beginnings to regional projects."
-        description="Founded in 2008 with three engineers, Neopetrol Engineering grew out of real operational needs: documentation that withstands audits, coordination that respects site realities, and supervision that keeps crews safe."
-        contentClassName="gap-16"
+        fullWidth
+        className="relative lg:py-0"
+        contentClassName="relative isolate gap-0 p-0"
       >
-        <div className="grid gap-12 xl:grid-cols-[minmax(0,0.65fr)_minmax(0,0.35fr)] xl:items-start">
-          <div className="space-y-7 text-brand-neutral">
-            <p className="text-base leading-relaxed">
-              The same discipline leads still mentor younger engineers, ensuring knowledge transfer and consistent output
-              across every engagement. Early assignments focused on energy and petrochemical upgrades at refineries,
-              storage terminals, and processing plants. As our clients faced larger capital programmes, the studio scaled
-              its capabilities—adding licensed specialists and deepening site supervision expertise.
+        <div className="grid w-full items-center lg:grid-cols-[minmax(0,0.55fr)_minmax(0,0.45fr)]">
+          <div className="order-2 flex flex-col gap-10 px-6 py-14 sm:px-12 md:py-20 lg:order-1 lg:pl-[var(--spacing-container)] lg:pr-12 xl:pr-16 2xl:pl-[calc((100vw-var(--size-content))/2)] 2xl:pr-20">
+            <div className="flex flex-col gap-6 text-brand-primary">
+              <h2 className="font-display text-4xl font-semibold leading-tight text-balance md:text-[3.25rem] lg:text-[3.5rem]">
+                Disciplines working as one team.
+              </h2>
+              <p className="text-lg leading-relaxed text-brand-neutral md:text-xl">
+                Process, mechanical, electrical, automation, and civil specialists share identical checklists, review loops,
+                and data vaults, so every deliverable reflects the same standard.
+              </p>
+            </div>
+            <p className="text-base leading-relaxed text-brand-neutral">
+              Team members work inside a single scheduling board, which keeps markups, calculations, and quantities aligned
+              even when the scope shifts mid-project.
             </p>
-            <p className="text-base leading-relaxed">
-              Expansion followed client demand abroad. Multidisciplinary teams delivered detailed design in Kazakhstan
-              while continuing to serve domestic partners such as Srbija Gas and StandardGas, including the wide hydrocarbon
-              fraction plant in Odzaci. Today, thirty-plus engineers collaborate across disciplines to deliver dependable
-              documentation and coordinated supervision across Southeast Europe.
+            <p className="text-base leading-relaxed text-brand-neutral">
+              The same discipline leads who model the solution also refine the handover set and prepare technical supervision
+              notes, keeping the hand-off clean for the field.
             </p>
-            <div className="grid gap-6 md:grid-cols-2">
-              {growthHighlights.map((item) => (
+            <div className="grid gap-4 sm:grid-cols-3">
+              {disciplineMetrics.map((item) => (
                 <div
-                  key={item.title}
-                  className="rounded-3xl border border-brand-primary/10 bg-white/80 p-6 shadow-[0_28px_70px_rgba(8,20,51,0.12)]"
+                  key={item.label}
+                  className="rounded-2xl border border-brand-primary/10 bg-white/90 p-5 text-center shadow-[0_28px_70px_rgba(8,20,51,0.12)]"
                 >
-                  <h3 className="font-display text-xl font-semibold text-brand-primary">{item.title}</h3>
-                  <p className="mt-3 text-sm leading-relaxed text-brand-neutral">{item.description}</p>
+                  <span className="text-3xl font-display font-semibold text-brand-primary">{item.value}</span>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-neutral">{item.label}</p>
                 </div>
               ))}
             </div>
           </div>
-
-          <div className="flex flex-col gap-6 rounded-[2.5rem] border border-brand-primary/10 bg-gradient-to-br from-brand-secondary/10 via-white to-white p-8 shadow-[0_32px_80px_rgba(8,20,51,0.14)]">
-            <span className="text-xs font-semibold uppercase tracking-[0.32em] text-brand-accent">Growth snapshot</span>
-            <ul className="space-y-4 text-sm leading-relaxed text-brand-primary">
-              {growthSnapshot.map((item) => (
-                <li key={item.label} className="rounded-2xl bg-white/70 p-4 shadow-[0_22px_55px_rgba(8,20,51,0.08)]">
-                  <span className="block text-xs font-semibold uppercase tracking-[0.28em] text-brand-accent/70">
-                    {item.label}
-                  </span>
-                  <span className="mt-2 block text-sm text-brand-primary">{item.value}</span>
-                </li>
-              ))}
-            </ul>
-            <div className="rounded-2xl border border-dashed border-brand-primary/20 bg-white/60 p-5 text-sm leading-relaxed text-brand-neutral">
-              <p>
-                Visual ideas: regional map with project markers, refinery photo essay, or timeline bar showing headcount
-                growth from 2008 to 2025.
-              </p>
-            </div>
+          <div className="order-1 h-full min-h-[480px] w-full border border-brand-primary/10 bg-white shadow-[0_40px_90px_rgba(8,20,51,0.08)] lg:order-2 lg:pr-[var(--spacing-container)] 2xl:pr-[calc((100vw-var(--size-content))/2)]">
+            <img
+              src="/media/about/Disciplines.webp"
+              alt="Team reviewing multidisciplinary documentation"
+              className="h-full w-full object-cover"
+              loading="lazy"
+            />
           </div>
         </div>
       </Section>
 
       <Section
         variant="muted"
-        align="left"
-        title="National infrastructure contribution."
-        description="Our teams contributed to the Serbian Gas Interconnector linking Bulgaria and Hungary as part of the South Stream network, providing mechanical, electrical, automation, and civil design expertise."
-        contentClassName="gap-14"
+        fullWidth
+        className="relative lg:py-0"
+        contentClassName="relative isolate gap-0 p-0"
       >
-        <div className="grid gap-10 lg:grid-cols-[minmax(0,0.55fr)_minmax(0,0.45fr)] lg:items-start">
-          <div className="space-y-6 text-brand-neutral">
-            <p>
-              Coordinated delivery across disciplines ensured reliable documentation for one of the country’s most strategic
-              energy corridors. Each package balanced regulatory compliance, constructability, and commissioning readiness,
-              reducing rework once construction began.
-            </p>
-            <p>
-              The project demonstrated our ability to integrate pipeline hydraulics, power supply, instrumentation, and civil
-              works into a single coherent design package—setting the benchmark for future national infrastructure programmes.
-            </p>
-          </div>
-          <div className="flex flex-col gap-4 rounded-[2rem] border border-brand-primary/15 bg-white p-6 shadow-[0_30px_70px_rgba(8,20,51,0.12)]">
-            <span className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-accent/70">
-              Visual direction
-            </span>
-            <p className="text-sm leading-relaxed text-brand-neutral">
-              Overlay suggestions: simplified pipeline map across Serbia, gradient line drawing showing gas flow, or drone
-              imagery from interconnection sites.
-            </p>
-          </div>
-        </div>
-      </Section>
-
-      <Section
-        align="left"
-        title="Multidisciplinary engineering expertise."
-        description="Our integrated structure keeps every discipline under one roof so coordination, documentation, and site supervision stay aligned from concept to handover."
-        contentClassName="gap-12"
-      >
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-3">
-          {departments.map((department) => (
-            <div
-              key={department}
-              className="flex h-full flex-col justify-between gap-4 rounded-3xl border border-brand-primary/10 bg-white/85 p-6 shadow-[0_24px_60px_rgba(8,20,51,0.1)]"
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-accent">Discipline</span>
-              <h3 className="font-display text-xl font-semibold text-brand-primary">{department}</h3>
-              <p className="text-sm leading-relaxed text-brand-neutral">
-                Coordinated design reviews, clash resolution, and site-ready documentation handled directly by senior
-                discipline leads.
-              </p>
-            </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        variant="muted"
-        align="left"
-        title="Certified quality, safety, and reliability."
-        description="An integrated management system guides every project, ensuring compliance, efficiency, and dependable delivery for regulated assets."
-        contentClassName="gap-14"
-      >
-        <div className="grid gap-6 md:grid-cols-2 lg:grid-cols-4">
-          {isoCertifications.map((cert) => (
-            <div
-              key={cert.code}
-              className="flex h-full flex-col gap-3 rounded-3xl border border-brand-primary/10 bg-white p-6 text-brand-primary shadow-[0_24px_60px_rgba(8,20,51,0.08)]"
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.28em] text-brand-accent">{cert.code}</span>
-              <h3 className="font-display text-lg font-semibold">{cert.focus}</h3>
-              <p className="text-sm leading-relaxed text-brand-neutral">
-                Audited system covering design, documentation, environmental impact, data security, and workforce safety.
-              </p>
-            </div>
-          ))}
-        </div>
-        <div className="flex flex-wrap gap-6 rounded-3xl border border-dashed border-brand-primary/20 bg-white/70 p-6 text-sm text-brand-neutral">
-          <span className="inline-flex items-center rounded-full bg-brand-secondary/15 px-4 py-2 font-semibold uppercase tracking-[0.24em] text-brand-primary">
-            4 ISO certificates
-          </span>
-          <span className="inline-flex items-center rounded-full bg-brand-secondary/15 px-4 py-2 font-semibold uppercase tracking-[0.24em] text-brand-primary">
-            30+ engineers
-          </span>
-          <span className="inline-flex items-center rounded-full bg-brand-secondary/15 px-4 py-2 font-semibold uppercase tracking-[0.24em] text-brand-primary">
-            17 years of experience
-          </span>
-        </div>
-      </Section>
-
-      <Section
-        align="left"
-        title="Licensed for design and construction."
-        description="We maintain the full set of national licenses required for design and construction works across mechanical, technological, electrical, civil, and supervision scopes."
-        contentClassName="gap-12"
-      >
-        <div className="rounded-[2.5rem] border border-brand-primary/10 bg-white p-8 shadow-[0_30px_75px_rgba(8,20,51,0.1)]">
-          <div className="grid gap-3 sm:grid-cols-2 lg:grid-cols-3">
-            {licenseCodes.map((code) => (
-              <span
-                key={code}
-                className="flex items-center justify-center rounded-2xl border border-brand-primary/15 bg-brand-secondary/10 px-4 py-3 text-sm font-semibold uppercase tracking-[0.22em] text-brand-primary"
-              >
-                {code}
+        <div className="grid w-full items-center lg:grid-cols-[minmax(0,0.45fr)_minmax(0,0.55fr)]">
+          <div className="order-1 px-6 py-14 sm:px-12 md:py-20 lg:pl-[var(--spacing-container)] lg:pr-12 xl:pr-16 2xl:pl-[calc((100vw-var(--size-content))/2)] 2xl:pr-20">
+            <div className="relative isolate h-full min-h-[420px] w-full overflow-hidden border border-brand-primary/10 bg-brand-primary/90 shadow-[0_40px_90px_rgba(8,20,51,0.18)]">
+              <img
+                src={deliveryImage}
+                alt="Engineers reviewing a delivery timeline"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/80 via-brand-primary/30 to-transparent" />
+              <div className="absolute inset-0 bg-brand-primary/15 mix-blend-multiply" />
+              <span className="pointer-events-none absolute -left-8 top-8 hidden h-44 w-44 border border-white/15 lg:block animate-orbit-two" />
+              <span className="pointer-events-none absolute bottom-8 right-8 inline-flex h-24 w-24 flex-col items-center justify-center gap-1 border border-white/30 bg-white/15 text-center text-xs font-semibold uppercase tracking-[0.28em] text-white shadow-[0_25px_60px_rgba(6,20,46,0.4)] backdrop-blur">
+                <span className="text-[0.55rem]">Gate</span>
+                <span className="font-display text-2xl">03</span>
               </span>
-            ))}
+            </div>
+          </div>
+          <div className="order-2 flex flex-col gap-10 px-6 pb-14 pt-0 sm:px-12 sm:pb-20 lg:pl-12 lg:pr-[var(--spacing-container)] lg:pt-20 xl:pl-16 2xl:pr-[calc((100vw-var(--size-content))/2)]">
+            <div className="flex flex-col gap-6 text-brand-primary">
+              <h2 className="font-display text-4xl font-semibold leading-tight text-balance md:text-[3.25rem] lg:text-[3.5rem]">
+                Planning, models, and markups move together.
+              </h2>
+              <p className="text-lg leading-relaxed text-brand-neutral md:text-xl">
+                Every package follows the same capture–resolve–release loop, so document owners keep control over versions
+                without slowing down schedules.
+              </p>
+            </div>
+            <p className="text-base leading-relaxed text-brand-neutral">
+              Review gates are simple: capture inputs, resolve clashes, release the approved pack. Each step is time-stamped
+              and transparent to project owners.
+            </p>
+            <p className="text-base leading-relaxed text-brand-neutral">
+              Because the same team tracks markups, clarifications arrive quickly and site crews never see conflicting drawings.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {deliveryMetrics.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-brand-primary/10 bg-white p-5 text-center shadow-[0_28px_70px_rgba(8,20,51,0.12)]"
+                >
+                  <span className="text-3xl font-display font-semibold text-brand-primary">{item.value}</span>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-neutral">{item.label}</p>
+                </div>
+              ))}
+            </div>
           </div>
         </div>
-        <p className="max-w-2xl text-sm leading-relaxed text-brand-neutral">
-          Visual treatment suggestion: license document mock-ups, embossed seals, or animated counters highlighting the
-          breadth of certified services.
-        </p>
+      </Section>
+
+      <Section
+        fullWidth
+        className="relative lg:py-0"
+        contentClassName="relative isolate gap-0 p-0"
+      >
+        <div className="grid w-full items-center lg:grid-cols-[minmax(0,0.55fr)_minmax(0,0.45fr)]">
+          <div className="order-2 flex flex-col gap-10 px-6 py-14 sm:px-12 md:py-20 lg:order-1 lg:pl-[var(--spacing-container)] lg:pr-12 xl:pr-16 2xl:pl-[calc((100vw-var(--size-content))/2)] 2xl:pr-20">
+            <div className="flex flex-col gap-6 text-brand-primary">
+              <h2 className="font-display text-4xl font-semibold leading-tight text-balance md:text-[3.25rem] lg:text-[3.5rem]">
+                Technical supervision of works.
+              </h2>
+              <p className="text-lg leading-relaxed text-brand-neutral md:text-xl">
+                Site requests go straight to the engineers who authored the documentation, keeping installation notes, tests,
+                and punch items aligned.
+              </p>
+            </div>
+            <p className="text-base leading-relaxed text-brand-neutral">
+              Supervision is purely technical: monitoring works, checking quantities, validating tests, and confirming that
+              each activity matches the drawings.
+            </p>
+            <p className="text-base leading-relaxed text-brand-neutral">
+              Weekly digital logs include photos, remarks, and decisions, so investors can act on verified information without
+              waiting for the next meeting.
+            </p>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {supervisionMetrics.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-brand-primary/10 bg-white/90 p-5 text-center shadow-[0_28px_70px_rgba(8,20,51,0.12)]"
+                >
+                  <span className="text-3xl font-display font-semibold text-brand-primary">{item.value}</span>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-neutral text-pretty">
+                    {item.label}
+                  </p>
+                </div>
+              ))}
+            </div>
+          </div>
+          <div className="order-1 px-6 pb-14 pt-0 sm:px-12 sm:pb-20 lg:order-2 lg:pr-[var(--spacing-container)] lg:pl-12 lg:pt-20 xl:pl-16 2xl:pr-[calc((100vw-var(--size-content))/2)]">
+            <div className="relative isolate h-full min-h-[420px] w-full overflow-hidden border border-white/15 bg-brand-primary/90 shadow-[0_40px_90px_rgba(8,20,51,0.2)]">
+              <img
+                src={supervisionImage}
+                alt="Technical supervisor reviewing site work"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-br from-brand-primary/85 via-brand-primary/35 to-transparent" />
+              <div className="absolute inset-0 bg-brand-primary/15 mix-blend-multiply" />
+              <span className="pointer-events-none absolute left-6 top-6 inline-flex h-28 w-28 flex-col items-center justify-center gap-1 border border-white/25 bg-white/10 text-center text-[0.55rem] font-semibold uppercase tracking-[0.28em] text-white shadow-[0_25px_60px_rgba(6,20,46,0.35)] backdrop-blur animate-orbit-two">
+                <span>Report</span>
+                <span className="font-display text-2xl">48h</span>
+              </span>
+              <span className="pointer-events-none absolute bottom-6 right-6 inline-flex h-16 w-16 items-center justify-center border border-white/30 text-[0.6rem] font-semibold uppercase tracking-[0.28em] text-white/80 shadow-[0_25px_60px_rgba(6,20,46,0.35)] backdrop-blur animate-orbit-one">
+                Tech QA
+              </span>
+            </div>
+          </div>
+        </div>
       </Section>
 
       <Section
         variant="muted"
-        align="left"
-        title="Modern tools for precise design."
-        description="Continuous investment in software and training keeps design coordination precise, reduces errors, and shortens construction feedback loops."
-        contentClassName="gap-12"
+        fullWidth
+        className="relative lg:py-0"
+        contentClassName="relative isolate gap-0 p-0"
       >
-        <div className="grid gap-4 sm:grid-cols-2 lg:grid-cols-3">
-          {softwareSuites.map((suite) => (
-            <div
-              key={suite}
-              className="rounded-3xl border border-brand-primary/10 bg-white p-5 text-sm font-semibold text-brand-primary shadow-[0_24px_60px_rgba(8,20,51,0.08)]"
-            >
-              {suite}
+        <div className="grid w-full items-center lg:grid-cols-[minmax(0,0.45fr)_minmax(0,0.55fr)]">
+          <div className="order-1 px-6 py-14 sm:px-12 md:py-20 lg:pl-[var(--spacing-container)] lg:pr-12 xl:pr-16 2xl:pl-[calc((100vw-var(--size-content))/2)] 2xl:pr-20">
+            <div className="relative isolate h-full min-h-[420px] w-full overflow-hidden border border-brand-primary/10 bg-brand-primary/90 shadow-[0_40px_90px_rgba(8,20,51,0.18)]">
+              <img
+                src={assuranceImage}
+                alt="Quality and digital assurance tools"
+                className="absolute inset-0 h-full w-full object-cover"
+                loading="lazy"
+              />
+              <div className="absolute inset-0 bg-gradient-to-tr from-brand-primary/75 via-brand-primary/25 to-transparent" />
+              <div className="absolute inset-0 bg-brand-primary/15 mix-blend-multiply" />
+              <span className="pointer-events-none absolute top-6 right-6 inline-flex h-24 w-24 flex-col items-center justify-center gap-1 border border-white/30 bg-white/15 text-center text-xs font-semibold uppercase tracking-[0.28em] text-white shadow-[0_25px_60px_rgba(6,20,46,0.35)] backdrop-blur">
+                <span>ISO</span>
+                <span className="font-display text-2xl">4</span>
+              </span>
             </div>
-          ))}
-        </div>
-        <div className="rounded-3xl border border-dashed border-brand-primary/20 bg-white/70 p-6 text-sm leading-relaxed text-brand-neutral">
-          Suggested art direction: software logo grid, CAD workspace screenshots, or a metric bar highlighting “10+ specialised
-          software suites.”
-        </div>
-      </Section>
-
-      <Section
-        align="left"
-        title="Mission and vision."
-        description="Structured for clarity today, ready for richer storytelling—think leadership commentary, project photography, or animated timelines."
-        contentClassName="gap-10"
-      >
-        <div className="grid gap-6 md:grid-cols-2">
-          {missionVision.map((item) => (
-            <div
-              key={item.title}
-              className="flex h-full flex-col gap-4 rounded-3xl border border-brand-primary/10 bg-white p-6 shadow-[0_28px_70px_rgba(8,20,51,0.1)]"
-            >
-              <span className="text-xs font-semibold uppercase tracking-[0.24em] text-brand-accent">{item.title}</span>
-              <p className="text-lg leading-relaxed text-brand-primary">{item.description}</p>
-              <div className="rounded-2xl border border-dashed border-brand-primary/20 bg-brand-secondary/10 p-4 text-xs uppercase tracking-[0.22em] text-brand-primary">
-                Future enhancement: embed regional map overlays or project video shorts.
-              </div>
+          </div>
+          <div className="order-2 flex flex-col gap-10 px-6 pb-14 pt-0 sm:px-12 sm:pb-20 lg:pl-12 lg:pr-[var(--spacing-container)] lg:pt-20 xl:pl-16 2xl:pr-[calc((100vw-var(--size-content))/2)]">
+            <div className="flex flex-col gap-6 text-brand-primary">
+              <h2 className="font-display text-4xl font-semibold leading-tight text-balance md:text-[3.25rem] lg:text-[3.5rem]">
+                Tools, certifications, and traceability.
+              </h2>
+              <p className="text-lg leading-relaxed text-brand-neutral md:text-xl">
+                Audited management systems, licensed experts, and a full digital toolbox keep every calculation, drawing,
+                and supervision note traceable.
+              </p>
             </div>
-          ))}
-        </div>
-      </Section>
-
-      <Section
-        variant="brand"
-        align="center"
-        title="Built on discipline. Driven by knowledge."
-        description="Neopetrol Engineering combines local expertise with regional experience to deliver projects that stand the test of time. Let us know what information helps your decision-making and we will prioritise it next."
-        contentClassName="gap-12"
-      >
-        <div className="flex flex-wrap justify-center gap-4 text-sm font-semibold uppercase tracking-[0.22em] text-white/80">
-          <span className="inline-flex items-center rounded-full border border-white/20 px-4 py-2">
-            Documentation that withstands audits
-          </span>
-          <span className="inline-flex items-center rounded-full border border-white/20 px-4 py-2">
-            Coordination grounded in site realities
-          </span>
-          <span className="inline-flex items-center rounded-full border border-white/20 px-4 py-2">
-            Supervision that keeps crews safe
-          </span>
+            <p className="text-base leading-relaxed text-brand-neutral">
+              Quality, environmental, information security, and safety certificates remain active through yearly audits.
+              Workflows, templates, and toolchains reflect those standards.
+            </p>
+            <p className="text-base leading-relaxed text-brand-neutral">
+              Licensed experts cover each discipline and the full scope of technical supervision, giving investors one accountable
+              partner for documentation, coordination, and close-out.
+            </p>
+            <div className="flex flex-wrap gap-3">
+              {isoCertifications.map((cert) => (
+                <span
+                  key={cert.code}
+                  className="inline-flex items-center rounded-full border border-brand-primary/15 bg-white px-4 py-2 text-xs font-semibold uppercase tracking-[0.22em] text-brand-primary shadow-[0_18px_45px_rgba(8,20,51,0.12)]"
+                >
+                  {cert.code} · {cert.focus}
+                </span>
+              ))}
+            </div>
+            <div className="grid gap-3 sm:grid-cols-3">
+              {licenseCodes.map((code) => (
+                <span
+                  key={code}
+                  className="rounded-2xl border border-dashed border-brand-primary/30 bg-white/80 px-4 py-3 text-center text-[0.7rem] font-semibold uppercase tracking-[0.22em] text-brand-primary"
+                >
+                  {code}
+                </span>
+              ))}
+            </div>
+            <div className="grid gap-4 sm:grid-cols-3">
+              {assuranceMetrics.map((item) => (
+                <div
+                  key={item.label}
+                  className="rounded-2xl border border-brand-primary/10 bg-white p-5 text-center shadow-[0_28px_70px_rgba(8,20,51,0.12)]"
+                >
+                  <span className="text-3xl font-display font-semibold text-brand-primary">{item.value}</span>
+                  <p className="mt-3 text-xs font-semibold uppercase tracking-[0.2em] text-brand-neutral">{item.label}</p>
+                </div>
+              ))}
+            </div>
+          </div>
         </div>
       </Section>
 
